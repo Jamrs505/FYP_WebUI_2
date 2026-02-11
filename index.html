@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>Hello World</h1>
 
     <div id="ruleHeaders"> <!-- https://docs.snort.org/rules/headers/ -->
-        <select id="action">
+        <select class="basicBox" id="action">
             <option selected=true>Action</option>
             <option value="alert">alert</option>
             <option value="block">block</option>
@@ -20,40 +23,88 @@
             <option value="reject">reject</option>
             <option value="rewrite">rewrite</option>
         </select>
-        <select id="protocol">
+        <select class="basicBox" id="protocol">
             <option selected=true>Protocol</option>
             <option value="ip">ip</option>
             <option value="icmp">icmp</option>
             <option value="tcp">tcp</option>
             <option value="udp">udp</option>
+            <!-- Include service & file rules later if needed -->
         </select>
-        <input type="text" id="sourceIP" placeholder="source ip"></input>
-        <input type="text" id="sourcePort" placeholder="source port"></input>
-        <select id="direction">
-            <option selected=true>Direction</option>
-            <option value="->">-></option>
+        <input class="basicBox" type="text" id="sourceIP" placeholder="source ip"></input>
+        <input class="basicBox" type="text" id="sourcePort" placeholder="source port"></input>
+        <select class="basicBox" id="direction">
+            <option selected=true value="->">-></option>
             <option value="<>"><></option>
         </select>
-        <input type="text" id="destinationIP" placeholder="destination ip"></input>
-        <input type="text" id="destinationPort" placeholder="destination port"></input>
+        <input class="basicBox" type="text" id="destinationIP" placeholder="destination ip"></input>
+        <input class="basicBox" type="text" id="destinationPort" placeholder="destination port"></input>
 
-    </div> 
+    </div>
 
     <div id="ruleOptions"> <!-- https://docs.snort.org/rules/options/ -->
-        
         <div id="ruleOptionsGeneral"> <!-- https://docs.snort.org/rules/options/general/ -->
-            <div id="msg"></div>
-            <div id="reference"></div>
-            <div id="gid"></div>
-            <div id="sid"></div>
-            <div id="rev"></div>
-            <div id="classtype"></div>
-            <div id="priority"></div>
-            <div id="metadata"></div>
-            <div id="service"></div>
-            <div id="rem"></div>
-            <div id="file_meta"></div>
+            <input class="basicBoxLong" type="text" id="msg" placeholder="Rule message"></input> <!-- long -->
+            <select class="basicBox" id="reference"> <!-- revisit this https://docs.snort.org/rules/options/general/reference -->
+                <option selected=true>Reference</option>
+                <option value="cve">cve</option>
+                <option value="bugtraq">bugtraq</option>
+                <option value="url">url</option>
+                <option value="cert">cert</option>
+                <option value="nessus">nessus</option>
+                <option value="metasploit">metasploit</option>
+            </select>
+            <input class="basicBoxShort" type="number" min="1" placeholder="gid"></input>
+            <input class="basicBoxShort" type="number" min="0" id="sid" placeholder="sid"></input>
+            <input class="basicBoxShort" type="number" min="1" id="rev" placeholder="rev"></input>
+            <select class="basicBox" id="classtype">
+                <option selected=true>Classtype</option>
+                <option value="not-suspicious">Not Suspicious Traffic</option>
+                <option value="unknown">Unknown Traffic</option>
+                <option value="bad-unknown">Potentially Bad Traffic</option>
+                <option value="attempted-recon">Attempted Information Leak</option>
+                <option value="successful-recon-limited">Information Leak</option>
+                <option value="successful-recon-largescale">Large Scale Information Leak</option>
+                <option value="attempted-dos">Attempted Denial of Service</option>
+                <option value="successful-dos">Denial of Service</option>
+                <option value="attempted-user">Attempted User Privilege Gain</option>
+                <option value="unsuccessful-user">Unsuccessful User Privilege Gain</option>
+                <option value="successful-user">Successful User Privilege Gain</option>
+                <option value="attempted-admin">Attempted Administrator Privilege Gain</option>
+                <option value="successful-admin">Successful Administrator Privilege Gain</option>
+                <option value="rpc-portmap-decode">Decode of an RPC Query</option>
+                <option value="shellcode-detect">Executable code was detected</option>
+                <option value="string-detect">A suspicious string was detected</option>
+                <option value="suspicious-filename-detect">A suspicious filename was detected</option>
+                <option value="suspicious-login">An attempted login using a suspicious username was detected</option>
+                <option value="system-call-detect">A system call was detected</option>
+                <option value="tcp-connection">A TCP connection was detected</option>
+                <option value="trojan-activity">A Network Trojan was detected</option>
+                <option value="unusual-client-port-connection">A client was using an unusual port</option>
+                <option value="network-scan">Detection of a Network Scan</option>
+                <option value="denial-of-service">Detection of a Denial of Service Attack</option>
+                <option value="non-standard-protocol">Detection of a non-standard protocol or event</option>
+                <option value="protocol-command-decode">Generic Protocol Command Decode</option>
+                <option value="web-application-activity">Access to a potentially vulnerable web application</option>
+                <option value="web-application-attack">Web Application Attack</option>
+                <option value="misc-activity">Misc Activity</option>
+                <option value="misc-attack">Misc Attack</option>
+                <option value="icmp-event">Generic ICMP event</option>
+                <option value="inappropriate-content">Inappropriate Content was Detected</option>
+                <option value="policy-violation">Potential Corporate Privacy Violation</option>
+                <option value="default-login-attempt">Attempt to login by a default username and password</option>
+                <option value="sdf">Sensitive Data</option>
+                <option value="file-format">Known malicious file or file based exploit</option>
+                <option value="malware-cnc">Known malware command and control traffic</option>
+                <option value="client-side-exploit">Known client side exploit attempt</option>
+            </select>
+            <input class="basicBoxShort" type="number" min="1" max="2147483647" id="priority" placeholder="Priority"></input>
+            <input class="basicBox" type="text" id="metadata" placeholder="metadata"></input>
+            <input class="basicBox" type="text" id="service" placeholder="service"></input>
+            <input class="basicBox" type="text" id="rem" placeholder="rem"></input>
             
+            <div id="file_meta"></div> <!-- https://docs.snort.org/rules/options/general/file_meta -->
+
         </div>
 
         <div id="ruleOptionsPayload"> <!-- https://docs.snort.org/rules/options/payload/ -->
@@ -117,6 +168,12 @@
             <div id="tag"></div>
         </div>
     </div>
-    
+
+    <p></p>
+    <div id="outputBox">
+        <input type="text" name="outputText" id="outputText" readonly></input>
+    </div>
+
 </body>
+
 </html>

@@ -1,0 +1,68 @@
+/* Generic Styles */
+body {
+  margin: 0;
+  background-color: #f1f1f1;
+  text-align: center;
+  color:#888888;
+  font-family: Helvetica;
+}
+
+.basicBox {
+  width: 100px;
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.basicBoxShort {
+  width: 70px;
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.basicBoxLong {
+  width: 500px;
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#ruleHeaders, #ruleOptionsGeneral, 
+#ruleOptionsPayload, #ruleOptionsNonPayload, 
+#ruleOptionsPostDetection {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-left: 10%;
+}
+
+/* Specific Styles */
+#direction {
+  width: 50px;
+}
+
+#ruleHeaders {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#ruleOptions {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#outputBox {
+  margin-top: 20px;
+}
+#outputText {
+  width: 80%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
