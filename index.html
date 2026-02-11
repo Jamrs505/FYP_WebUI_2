@@ -54,7 +54,8 @@
                 <option value="nessus">nessus</option>
                 <option value="metasploit">metasploit</option>
             </select>
-            <input class="basicBoxShort" type="number" min="1" placeholder="gid"></input>
+            <input class="basicBox" type="text" id="referenceText" placeholder="reference"></input>
+            <input class="basicBoxShort" type="number" min="1" id="gid" placeholder="gid"></input>
             <input class="basicBoxShort" type="number" min="0" id="sid" placeholder="sid"></input>
             <input class="basicBoxShort" type="number" min="1" id="rev" placeholder="rev"></input>
             <select class="basicBox" id="classtype">
@@ -101,7 +102,7 @@
             <input class="basicBoxShort" type="number" min="1" max="2147483647" id="priority" placeholder="Priority"></input>
             <input class="basicBox" type="text" id="metadata" placeholder="metadata"></input>
             <input class="basicBox" type="text" id="service" placeholder="service"></input>
-            <input class="basicBox" type="text" id="rem" placeholder="rem"></input>
+            <input class="basicBoxLong" type="text" id="rem" placeholder="Rule comment"></input>
             
             <div id="file_meta"></div> <!-- https://docs.snort.org/rules/options/general/file_meta -->
 
@@ -174,6 +175,7 @@
         <input type="text" name="outputText" id="outputText" readonly></input>
     </div>
 
+    <script src="script.js"></script>
 </body>
 
 </html>
