@@ -109,15 +109,23 @@
         </div>
 
         <div id="ruleOptionsPayload"> <!-- https://docs.snort.org/rules/options/payload/ -->
-            <div id="content"></div>
-            <div id="fast_pattern"></div>
-            <div id="nocase"></div>
-            <div id="width"></div>
-            <div id="endian"></div>
-            <div id="offset"></div>
-            <div id="depth"></div>
-            <div id="distance"></div>
-            <div id="within"></div>
+            <input class="basicBoxLong" type="text" id="content" placeholder="content"></input>
+            <label for="fast_pattern">fast_pattern</label>
+            <input class="basicBoxShort" type="checkbox" id="fast_pattern"></input>
+            <label for="nocase">nocase</label>
+            <input class="basicBoxShort" type="checkbox" id="nocase"></input>
+            
+            <input class="basicBox" type="text" id="width" placeholder="width"></input> <!-- Integer -->
+            <select class="basicBox" id="endian">
+                <option selected=true >endian</option>
+                <option value="big">big</option>
+                <option value="little">little</option>
+            </select>
+            <input class="basicBox" type="text" id="offset" placeholder="offset"></input> <!-- Integer -->
+            <input class="basicBox" type="text" id="depth" placeholder="depth"></input> <!-- Integer -->
+            <input class="basicBox" type="text" id="distance" placeholder="distance"></input> <!-- Integer -->
+            <input class="basicBox" type="text" id="within" placeholder="within"></input> <!-- Integer -->
+
             <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
                 <div id="http_uri"></div>
             </div>

@@ -51,7 +51,8 @@ body {
   margin-bottom: 20px;
 }
 
-#ruleOptions {
+#ruleOptionsGeneral, #ruleOptionsPayload, 
+#ruleOptionsNonPayload, #ruleOptionsPostDetection {
   margin-top: 20px;
   margin-bottom: 20px;
 }
