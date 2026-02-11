@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+
+    <div id="ruleHeaders"> <!-- https://docs.snort.org/rules/headers/ -->
+        <select id="action">
+            <option selected=true>Action</option>
+            <option value="alert">alert</option>
+            <option value="block">block</option>
+            <option value="drop">drop</option>
+            <option value="log">log</option>
+            <option value="pass">pass</option>
+            <option value="react">react</option>
+            <option value="reject">reject</option>
+            <option value="rewrite">rewrite</option>
+        </select>
+        <select id="protocol">
+            <option selected=true>Protocol</option>
+            <option value="ip">ip</option>
+            <option value="icmp">icmp</option>
+            <option value="tcp">tcp</option>
+            <option value="udp">udp</option>
+        </select>
+        <input type="text" id="sourceIP" placeholder="source ip"></input>
+        <input type="text" id="sourcePort" placeholder="source port"></input>
+        <select id="direction">
+            <option selected=true>Direction</option>
+            <option value="->">-></option>
+            <option value="<>"><></option>
+        </select>
+        <input type="text" id="destinationIP" placeholder="destination ip"></input>
+        <input type="text" id="destinationPort" placeholder="destination port"></input>
+
+    </div> 
+
+    <div id="ruleOptions"> <!-- https://docs.snort.org/rules/options/ -->
+        
+        <div id="ruleOptionsGeneral"> <!-- https://docs.snort.org/rules/options/general/ -->
+            <div id="msg"></div>
+            <div id="reference"></div>
+            <div id="gid"></div>
+            <div id="sid"></div>
+            <div id="rev"></div>
+            <div id="classtype"></div>
+            <div id="priority"></div>
+            <div id="metadata"></div>
+            <div id="service"></div>
+            <div id="rem"></div>
+            <div id="file_meta"></div>
+            
+        </div>
+
+        <div id="ruleOptionsPayload"> <!-- https://docs.snort.org/rules/options/payload/ -->
+            <div id="content"></div>
+            <div id="fast_pattern"></div>
+            <div id="nocase"></div>
+            <div id="width"></div>
+            <div id="endian"></div>
+            <div id="offset"></div>
+            <div id="depth"></div>
+            <div id="distance"></div>
+            <div id="within"></div>
+            <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
+                <div id="http_uri"></div>
+            </div>
+            <div id="bufferlen"></div>
+            <div id="isdataat"></div>
+            <div id="dsize"></div>
+            <div id="pcre"></div>
+            <div id="regex"></div>
+            <div id="pkt_data"></div>
+            <div id="raw_data"></div>
+            <div id="file_data"></div>
+            <div id="js_data"></div>
+            <div id="vba_data"></div>
+            <div id="base64_decode"></div>
+            <div id="base64_data"></div>
+            <div id="byte_extract"></div>
+            <div id="byte_test"></div>
+            <div id="byte_math"></div>
+            <div id="byte_jump"></div>
+        </div>
+
+        <div id="ruleOptionsNonPayload"> <!-- https://docs.snort.org/rules/options/non_payload/ -->
+            <div id="fragoffset"></div>
+            <div id="ttl"></div>
+            <div id="tos"></div>
+            <div id="id"></div>
+            <div id="ipopts"></div>
+            <div id="fragbits"></div>
+            <div id="ip_proto"></div>
+            <div id="flags"></div>
+            <div id="flow"></div>
+            <div id="flowbits"></div>
+            <div id="file_type"></div>
+            <div id="seq"></div>
+            <div id="window"></div>
+            <div id="itype"></div>
+            <div id="icode"></div>
+            <div id="icmp_id"></div>
+            <div id="icmp_seq"></div>
+            <div id="rpc"></div>
+            <div id="stream_reassemble"></div>
+            <div id="stream_size"></div>
+
+        </div>
+
+        <div id="ruleOptionsPostDetection"> <!-- https://docs.snort.org/rules/options/post/ -->
+            <div id="detection_filter"></div>
+            <div id="replace"></div>
+            <div id="tag"></div>
+        </div>
+    </div>
+    
+</body>
+</html>
