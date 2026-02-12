@@ -108,44 +108,92 @@
 
         </div>
 
-        <div id="ruleOptionsPayload"> <!-- https://docs.snort.org/rules/options/payload/ -->
-            <input class="basicBoxLong" type="text" id="content" placeholder="content"></input>
-            <label for="fast_pattern">fast_pattern</label>
-            <input class="basicBoxShort" type="checkbox" id="fast_pattern"></input>
-            <label for="nocase">nocase</label>
-            <input class="basicBoxShort" type="checkbox" id="nocase"></input>
+        <div id="ruleOptionsPayload">
+            <div id="contentDiv">
+                <input class="basicBoxLong" type="text" id="content" placeholder="content"></input>
+                <label for="fast_pattern">fast_pattern</label>
+                <input class="basicBoxShort" type="checkbox" id="fast_pattern"></input>
+                <label for="nocase">nocase</label>
+                <input class="basicBoxShort" type="checkbox" id="nocase"></input>
             
-            <input class="basicBox" type="text" id="width" placeholder="width"></input> <!-- Integer -->
-            <select class="basicBox" id="endian">
-                <option selected=true >endian</option>
-                <option value="big">big</option>
-                <option value="little">little</option>
-            </select>
-            <input class="basicBox" type="text" id="offset" placeholder="offset"></input> <!-- Integer -->
-            <input class="basicBox" type="text" id="depth" placeholder="depth"></input> <!-- Integer -->
-            <input class="basicBox" type="text" id="distance" placeholder="distance"></input> <!-- Integer -->
-            <input class="basicBox" type="text" id="within" placeholder="within"></input> <!-- Integer -->
+                <input class="basicBox" type="text" id="width" placeholder="width"></input> <!-- Integer -->
+                <select class="basicBox" id="endian">
+                    <option selected=true>endian</option>
+                    <option value="big">big</option>
+                    <option value="little">little</option>
+                </select>
+                <input class="basicBox" type="text" id="offset" placeholder="offset"></input> <!-- Integer -->
+                <input class="basicBox" type="text" id="depth" placeholder="depth"></input> <!-- Integer -->
+                <input class="basicBox" type="text" id="distance" placeholder="distance"></input> <!-- Integer -->
+                <input class="basicBox" type="text" id="within" placeholder="within"></input> <!-- Integer -->
+            
+                <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
+                    <div id="http_uri"></div> <!-- consider either not adding this or adding a limited amount of options before adding all options-->
+                </div>
 
-            <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
-                <div id="http_uri"></div>
+                <p></p>
+                <div id="bufferlenDiv">
+                    <input hidden class="basicBox" type="text" id="bufferlenStart" placeholder="bufferlen start"></input>
+                    <select class="basicBox" id="bufferlenOperator">
+                        <option selected=true>Buffer Length</option>
+                        <option value="&gt;">&gt;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&equals;">&equals;</option>
+                        <option value="!">!</option>
+                        <option value="&gt;&equals;">&gt;&equals;</option>
+                        <option value="&lt;&equals;">&lt;&equals;</option>
+                        <option value="&lt;&gt;">&lt;&gt;</option>
+                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                    </select>
+                    <input class="basicBox" type="text" id="bufferlen" placeholder="bufferlen"></input>
+                    <label for="bufferlenRelative">relative</label>
+                    <input class="basicBoxShort" type="checkbox" id="bufferlenRelative"></input>
+                </div>
+
+                <div id="isdataatDiv">
+                    <label for="isdataatNotOperator">!</label>
+                    <input class="basicBoxShort" type="checkbox" id="isdataatNotOperator"></input>
+                    <input class="basicBox" type="number" min="0" max="65535" id="isdataat" placeholder="isdataat"></input>
+                    <label for="isdataatRelative">relative</label>
+                    <input class="basicBoxShort" type="checkbox" id="isdataatRelative"></input>
+                </div>
+
+                <div>
+                    <input hidden class="basicBox" type="number" min="0" max="65535" id="dsizeStart" placeholder="dsize start"></input>
+                    <select class="basicBox" id="dsizeOperator">
+                        <option selected=true>Data Size</option>
+                        <option value="&gt;">&gt;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&equals;">&equals;</option>
+                        <option value="!">!</option>
+                        <option value="&gt;&equals;">&gt;&equals;</option>
+                        <option value="&lt;&equals;">&lt;&equals;</option>
+                        <option value="&lt;&gt;">&lt;&gt;</option>
+                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                    </select>
+                    <input class="basicBox" type="number" min="0" max="65535" id="dsize" placeholder="dsize"></input>
+                </div>
+
+                <div id="pcreDiv"> 
+                    <input class="basicBoxLong" type="text" id="pcre" placeholder="pcre"></input>
+                    <label for="pcreFast_pattern">fast_pattern</label>
+                    <input class="basicBoxShort" type="checkbox" id="pcreFast_pattern"></input>
+                    <label for="pcreNocase">nocase</label>
+                    <input class="basicBoxShort" type="checkbox" id="pcreNocase"></input>
+                </div>
+                <div id="pkt_data"></div>
+                <div id="raw_data"></div>
+                <div id="file_data"></div>
+                <div id="js_data"></div>
+                <div id="vba_data"></div>
+                <div id="base64_decode"></div>
+                <div id="base64_data"></div>
+                <div id="byte_extract"></div>
+                <div id="byte_test"></div>
+                <div id="byte_math"></div>
+                <div id="byte_jump"></div>
+            
             </div>
-            <div id="bufferlen"></div>
-            <div id="isdataat"></div>
-            <div id="dsize"></div>
-            <div id="pcre"></div>
-            <div id="regex"></div>
-            <div id="pkt_data"></div>
-            <div id="raw_data"></div>
-            <div id="file_data"></div>
-            <div id="js_data"></div>
-            <div id="vba_data"></div>
-            <div id="base64_decode"></div>
-            <div id="base64_data"></div>
-            <div id="byte_extract"></div>
-            <div id="byte_test"></div>
-            <div id="byte_math"></div>
-            <div id="byte_jump"></div>
-        </div>
 
         <div id="ruleOptionsNonPayload"> <!-- https://docs.snort.org/rules/options/non_payload/ -->
             <div id="fragoffset"></div>
