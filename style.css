@@ -67,3 +67,19 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+#http_method {
+  width: 150px;
+}
+
+#http_stat_code {
+  width: 280px;
+}
+
+#flowState, #flowDirection {
+  width: 150px;
+}
+
+#ruleHeaders, #ruleOptionsGeneral, #ruleOptionsPayload, #ruleOptionsNonPayload, #ruleOptionsPostDetection {
+  border: 1px solid #888888;
+}

@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Snort 3 Assistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Hello World</h1>
+    <h1>Snort 3 Rule Helper</h1>
 
-    <div id="ruleHeaders"> <!-- https://docs.snort.org/rules/headers/ -->
+    <div id="ruleHeaders"> <!-- Basic Inputs-->
         <select class="basicBox" id="action">
             <option selected=true>Action</option>
             <option value="alert">alert</option>
@@ -35,7 +35,9 @@
         <input class="basicBox" type="text" id="sourcePort" placeholder="source port"></input>
         <select class="basicBox" id="direction">
             <option selected=true value="->">-></option>
-            <option value="<>"><></option>
+            <option value="<>">
+                <>
+            </option>
         </select>
         <input class="basicBox" type="text" id="destinationIP" placeholder="destination ip"></input>
         <input class="basicBox" type="text" id="destinationPort" placeholder="destination port"></input>
@@ -45,7 +47,8 @@
     <div id="ruleOptions"> <!-- https://docs.snort.org/rules/options/ -->
         <div id="ruleOptionsGeneral"> <!-- https://docs.snort.org/rules/options/general/ -->
             <input class="basicBoxLong" type="text" id="msg" placeholder="Rule message"></input> <!-- long -->
-            <select class="basicBox" id="reference"> <!-- revisit this https://docs.snort.org/rules/options/general/reference -->
+            <select class="basicBox" id="reference">
+                <!-- revisit this https://docs.snort.org/rules/options/general/reference -->
                 <option selected=true>Reference</option>
                 <option value="cve">cve</option>
                 <option value="bugtraq">bugtraq</option>
@@ -99,11 +102,12 @@
                 <option value="malware-cnc">Known malware command and control traffic</option>
                 <option value="client-side-exploit">Known client side exploit attempt</option>
             </select>
-            <input class="basicBoxShort" type="number" min="1" max="2147483647" id="priority" placeholder="Priority"></input>
+            <input class="basicBoxShort" type="number" min="1" max="2147483647" id="priority"
+                placeholder="Priority"></input>
             <input class="basicBox" type="text" id="metadata" placeholder="metadata"></input>
             <input class="basicBox" type="text" id="service" placeholder="service"></input>
             <input class="basicBoxLong" type="text" id="rem" placeholder="Rule comment"></input>
-            
+
             <div id="file_meta"></div> <!-- https://docs.snort.org/rules/options/general/file_meta -->
 
         </div>
@@ -115,7 +119,7 @@
                 <input class="basicBoxShort" type="checkbox" id="fast_pattern"></input>
                 <label for="nocase">nocase</label>
                 <input class="basicBoxShort" type="checkbox" id="nocase"></input>
-            
+
                 <input class="basicBox" type="text" id="width" placeholder="width"></input> <!-- Integer -->
                 <select class="basicBox" id="endian">
                     <option selected=true>endian</option>
@@ -126,103 +130,241 @@
                 <input class="basicBox" type="text" id="depth" placeholder="depth"></input> <!-- Integer -->
                 <input class="basicBox" type="text" id="distance" placeholder="distance"></input> <!-- Integer -->
                 <input class="basicBox" type="text" id="within" placeholder="within"></input> <!-- Integer -->
-            
-                <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
-                    <div id="http_uri"></div> <!-- consider either not adding this or adding a limited amount of options before adding all options-->
-                </div>
-
-                <p></p>
-                <div id="bufferlenDiv">
-                    <input hidden class="basicBox" type="text" id="bufferlenStart" placeholder="bufferlen start"></input>
-                    <select class="basicBox" id="bufferlenOperator">
-                        <option selected=true>Buffer Length</option>
-                        <option value="&gt;">&gt;</option>
-                        <option value="&lt;">&lt;</option>
-                        <option value="&equals;">&equals;</option>
-                        <option value="!">!</option>
-                        <option value="&gt;&equals;">&gt;&equals;</option>
-                        <option value="&lt;&equals;">&lt;&equals;</option>
-                        <option value="&lt;&gt;">&lt;&gt;</option>
-                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
-                    </select>
-                    <input class="basicBox" type="text" id="bufferlen" placeholder="bufferlen"></input>
-                    <label for="bufferlenRelative">relative</label>
-                    <input class="basicBoxShort" type="checkbox" id="bufferlenRelative"></input>
-                </div>
-
-                <div id="isdataatDiv">
-                    <label for="isdataatNotOperator">!</label>
-                    <input class="basicBoxShort" type="checkbox" id="isdataatNotOperator"></input>
-                    <input class="basicBox" type="number" min="0" max="65535" id="isdataat" placeholder="isdataat"></input>
-                    <label for="isdataatRelative">relative</label>
-                    <input class="basicBoxShort" type="checkbox" id="isdataatRelative"></input>
-                </div>
-
-                <div>
-                    <input hidden class="basicBox" type="number" min="0" max="65535" id="dsizeStart" placeholder="dsize start"></input>
-                    <select class="basicBox" id="dsizeOperator">
-                        <option selected=true>Data Size</option>
-                        <option value="&gt;">&gt;</option>
-                        <option value="&lt;">&lt;</option>
-                        <option value="&equals;">&equals;</option>
-                        <option value="!">!</option>
-                        <option value="&gt;&equals;">&gt;&equals;</option>
-                        <option value="&lt;&equals;">&lt;&equals;</option>
-                        <option value="&lt;&gt;">&lt;&gt;</option>
-                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
-                    </select>
-                    <input class="basicBox" type="number" min="0" max="65535" id="dsize" placeholder="dsize"></input>
-                </div>
-
-                <div id="pcreDiv"> 
-                    <input class="basicBoxLong" type="text" id="pcre" placeholder="pcre"></input>
-                    <label for="pcreFast_pattern">fast_pattern</label>
-                    <input class="basicBoxShort" type="checkbox" id="pcreFast_pattern"></input>
-                    <label for="pcreNocase">nocase</label>
-                    <input class="basicBoxShort" type="checkbox" id="pcreNocase"></input>
-                </div>
-                <div id="pkt_data"></div>
-                <div id="raw_data"></div>
-                <div id="file_data"></div>
-                <div id="js_data"></div>
-                <div id="vba_data"></div>
-                <div id="base64_decode"></div>
-                <div id="base64_data"></div>
-                <div id="byte_extract"></div>
-                <div id="byte_test"></div>
-                <div id="byte_math"></div>
-                <div id="byte_jump"></div>
-            
             </div>
 
+            <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
+                <div id="http_uri"></div> <!-- Consider adding, unlikely -->
+                <input class="basicBox" type="text" id="http_uri" placeholder="HTTP URI"></input>
+                
+                <div id="http_method"></div> <!-- Must Include!!! -->
+                <select class="basicBox" id="http_method"> 
+                    <option selected=true>HTTP Method</option>
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="OPTIONS">OPTIONS</option>
+                    <option value="HEAD">HEAD</option>
+                    <option value="DELETE">DELETE</option>
+                    <option value="PUT">PUT</option>
+                    <option value="TRACE">TRACE</option>
+                    <option value="CONNECT">CONNECT</option>
+                </select>
+                <div id="http_stat_code"></div> <!-- Must Include!!! -->
+                <select class="basicBox" id="http_stat_code">
+                    <option selected=true>HTTP Status Code</option>
+                    <option value="100">100 Continue</option>
+                    <option value="101">101 Switching Protocols</option>
+                    <option value="102">102 Processing</option>
+                    <option value="103">103 Early Hints</option>
+                    <option value="200">200 OK</option>
+                    <option value="201">201 Created</option>
+                    <option value="202">202 Accepted</option>
+                    <option value="203">203 Non-Authoritative Information</option>
+                    <option value="204">204 No Content</option>
+                    <option value="205">205 Reset Content</option>
+                    <option value="206">206 Partial Content</option>
+                    <option value="207">207 Multi-Status</option>
+                    <option value="208">208 Already Reported</option>
+                    <option value="226">226 IM Used</option>
+                    <option value="300">300 Multiple Choices</option>
+                    <option value="301">301 Moved Permanently</option>
+                    <option value="302">302 Found</option>
+                    <option value="303">303 See Other</option>
+                    <option value="304">304 Not Modified</option>
+                    <option value="305">305 Use Proxy</option>
+                    <option value="307">307 Temporary Redirect</option>
+                    <option value="308">308 Permanent Redirect</option>
+                    <option value="400">400 Bad Request</option>
+                    <option value="401">401 Unauthorized</option>
+                    <option value="402">402 Payment Required</option>
+                    <option value="403">403 Forbidden</option>
+                    <option value="404">404 Not Found</option>
+                    <option value="405">405 Method Not Allowed</option>
+                    <option value="406">406 Not Acceptable</option>
+                    <option value="407">407 Proxy Authentication Required</option>
+                    <option value="408">408 Request Timeout</option>
+                    <option value="409">409 Conflict</option>
+                    <option value="410">410 Gone</option>
+                    <option value="411">411 Length Required</option>
+                    <option value="412">412 Precondition Failed</option>
+                    <option value="413">413 Payload Too Large</option>
+                    <option value="414">414 URI Too Long</option>
+                    <option value="415">415 Unsupported Media Type</option>
+                    <option value="416">416 Range Not Satisfiable</option>
+                    <option value="417">417 Expectation Failed</option>
+                    <option value="418">418 I'm a teapot</option>
+                    <option value="421">421 Misdirected Request</option>
+                    <option value="422">422 Unprocessable Entity</option>
+                    <option value="423">423 Locked</option>
+                    <option value="424">424 Failed Dependency</option>
+                    <option value="425">425 Too Early</option>
+                    <option value="426">426 Upgrade Required</option>
+                    <option value="428">428 Precondition Required</option>
+                    <option value="429">429 Too Many Requests</option>
+                    <option value="431">431 Request Header Fields Too Large</option>
+                    <option value="451">451 Unavailable For Legal Reasons</option>
+                    <option value="500">500 Internal Server Error</option>
+                    <option value="501">501 Not Implemented</option>
+                    <option value="502">502 Bad Gateway</option>
+                    <option value="503">503 Service Unavailable</option>
+                    <option value="504">504 Gateway Timeout</option>
+                    <option value="505">505 HTTP Version Not Supported</option>
+                    <option value="506">506 Variant Also Negotiates</option>
+                    <option value="507">507 Insufficient Storage</option>
+                    <option value="508">508 Loop Detected</option>
+                    <option value="510">510 Not Extended</option>
+                    <option value="511">511 Network Authentication Required</option>
+                </select>
+
+                <!-- consider adding a limited amount of options -->
+            </div>
+
+            <div id="bufferlenDiv">
+                <input hidden class="basicBox" type="text" id="bufferlenStart" placeholder="bufferlen start"></input>
+                <select class="basicBox" id="bufferlenOperator">
+                    <option selected=true>Buffer Length</option>
+                    <option value="&gt;">&gt;</option>
+                    <option value="&lt;">&lt;</option>
+                    <option value="&equals;">&equals;</option>
+                    <option value="!">!</option>
+                    <option value="&gt;&equals;">&gt;&equals;</option>
+                    <option value="&lt;&equals;">&lt;&equals;</option>
+                    <option value="&lt;&gt;">&lt;&gt;</option>
+                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                </select>
+                <input class="basicBox" type="text" id="bufferlen" placeholder="bufferlen"></input>
+                <label for="bufferlenRelative">relative</label>
+                <input class="basicBoxShort" type="checkbox" id="bufferlenRelative"></input>
+            </div>
+
+            <div id="isdataatDiv">
+                <label for="isdataatNotOperator">!</label>
+                <input class="basicBoxShort" type="checkbox" id="isdataatNotOperator"></input>
+                <input class="basicBox" type="number" min="0" max="65535" id="isdataat" placeholder="isdataat"></input>
+                <label for="isdataatRelative">relative</label>
+                <input class="basicBoxShort" type="checkbox" id="isdataatRelative"></input>
+            </div>
+
+            <div id="dsizeDiv">
+                <input hidden class="basicBox" type="number" min="0" max="65535" id="dsizeStart"
+                    placeholder="dsize start"></input>
+                <select class="basicBox" id="dsizeOperator">
+                    <option selected=true>Data Size</option>
+                    <option value="&gt;">&gt;</option>
+                    <option value="&lt;">&lt;</option>
+                    <option value="&equals;">&equals;</option>
+                    <option value="!">!</option>
+                    <option value="&gt;&equals;">&gt;&equals;</option>
+                    <option value="&lt;&equals;">&lt;&equals;</option>
+                    <option value="&lt;&gt;">&lt;&gt;</option>
+                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                </select>
+                <input class="basicBox" type="number" min="0" max="65535" id="dsize" placeholder="dsize"></input>
+            </div>
+
+            <div id="pcreDiv">
+                <input class="basicBoxLong" type="text" id="pcre" placeholder="pcre"></input>
+                <label for="pcreFast_pattern">fast_pattern</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFast_pattern"></input>
+                <label for="pcreNocase">nocase</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreNocase"></input>
+            </div>
+
+        </div>
+
         <div id="ruleOptionsNonPayload"> <!-- https://docs.snort.org/rules/options/non_payload/ -->
-            <div id="fragoffset"></div>
-            <div id="ttl"></div>
-            <div id="tos"></div>
-            <div id="id"></div>
-            <div id="ipopts"></div>
-            <div id="fragbits"></div>
-            <div id="ip_proto"></div>
-            <div id="flags"></div>
-            <div id="flow"></div>
-            <div id="flowbits"></div>
-            <div id="file_type"></div>
-            <div id="seq"></div>
-            <div id="window"></div>
-            <div id="itype"></div>
-            <div id="icode"></div>
-            <div id="icmp_id"></div>
-            <div id="icmp_seq"></div>
-            <div id="rpc"></div>
-            <div id="stream_reassemble"></div>
-            <div id="stream_size"></div>
+            <div id="ttlDiv">
+                <input class="basicBox" type="text" id="ttl" placeholder="ttl"></input>
+            </div>
+            <div id="ip_protoDiv">
+                <input class="basicBox" type="text" id="ip_proto" placeholder="ip_proto"></input>
+            </div> 
+            <div id="flagsDiv">
+                <label for="flagFIN">FIN</label>
+                <input class="basicBoxShort" type="checkbox" id="flagFIN"></input>
+                <label for="flagSYN">SYN</label>
+                <input class="basicBoxShort" type="checkbox" id="flagSYN"></input>
+                <label for="flagRST">RST</label>
+                <input class="basicBoxShort" type="checkbox" id="flagRST"></input>
+                <label for="flagPSH">PSH</label>
+                <input class="basicBoxShort" type="checkbox" id="flagPSH"></input>
+                <label for="flagACK">ACK</label>
+                <input class="basicBoxShort" type="checkbox" id="flagACK"></input>
+                <label for="flagURG">URG</label>
+                <input class="basicBoxShort" type="checkbox" id="flagURG"></input>
+                <label for="flagCWR">CWR</label>
+                <input class="basicBoxShort" type="checkbox" id="flagCWR"></input>
+                <label for="flagECE">ECE</label>
+                <input class="basicBoxShort" type="checkbox" id="flagECE"></input>
+                <label for="flag0">None</label>
+                <input class="basicBoxShort" type="checkbox" id="flag0"></input>
+                <label for="flag+">+</label>
+                <input class="basicBoxShort" type="checkbox" id="flag+"></input>
+                <label for="flag*">*</label>
+                <input class="basicBoxShort" type="checkbox" id="flag*"></input>
+                <label for="flag!">!</label>
+                <input class="basicBoxShort" type="checkbox" id="flag!"></input>
+            </div>
+            <div id="flowDiv">
+                <select class="basicBox" id="flowState">
+                    <option selected=true>Flow State</option>
+                    <option value="established">established</option>
+                    <option value="not_established">not_established</option>
+                    <option value="stateless">stateless</option>
+                </select>
+                <select class="basicBox" id="flowDirection">
+                    <option selected=true>Flow Direction</option>
+                    <option value="to_client">to_client</option>
+                    <option value="to_server">to_server</option>
+                    <option value="from_client">from_client</option>
+                    <option value="from_server">from_server</option>
+                </select>
+            </div>
+            <div id="itypeDiv">
+                <input hidden class="basicBox" type="number" min="0" max="254" id="itypeStart"
+                    placeholder="itype start"></input>
+                <select class="basicBox" id="itypeOperator">
+                    <option selected=true>ITYPE Operator</option>
+                    <option value="&gt;">&gt;</option>
+                    <option value="&lt;">&lt;</option>
+                    <option value="&equals;">&equals;</option>
+                    <option value="!">!</option>
+                    <option value="&gt;&equals;">&gt;&equals;</option>
+                    <option value="&lt;&equals;">&lt;&equals;</option>
+                    <option value="&lt;&gt;">&lt;&gt;</option>
+                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                </select>
+                <input class="basicBox" type="number" min="0" max="255" id="itype" placeholder="itype"></input>
+            </div>
+            <div id="icodeDiv">
+                <input hidden class="basicBox" type="number" min="0" max="254" id="icodeStart"
+                    placeholder="icode start"></input>
+                <select class="basicBox" id="icodeOperator">
+                    <option selected=true>ICODE Operator</option>
+                    <option value="&gt;">&gt;</option>
+                    <option value="&lt;">&lt;</option>
+                    <option value="&equals;">&equals;</option>
+                    <option value="!">!</option>
+                    <option value="&gt;&equals;">&gt;&equals;</option>
+                    <option value="&lt;&equals;">&lt;&equals;</option>
+                    <option value="&lt;&gt;">&lt;&gt;</option>
+                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                </select>
+                <input class="basicBox" type="number" min="0" max="255" id="icode" placeholder="icode"></input>
+            </div>
 
         </div>
 
         <div id="ruleOptionsPostDetection"> <!-- https://docs.snort.org/rules/options/post/ -->
-            <div id="detection_filter"></div>
-            <div id="replace"></div>
-            <div id="tag"></div>
+            <div id="detection_filter">
+                <input class="basicBox" type="text" id="detection_filterTrack" placeholder="detection filter track"></input>
+                <select class="basicBox" id="detection_filterTrack">
+                    <option selected=true>Track by</option>
+                    <option value="by_src">source</option>
+                    <option value="by_dst">destination</option>
+                </select>
+                <input class="basicBox" type="number" min="1" id="detection_filterCount" placeholder="detection filter count"></input>
+                <input class="basicBox" type="number" min="1" id="detection_filterSeconds" placeholder="detection filter seconds"></input>
+            </div>
         </div>
     </div>
 
