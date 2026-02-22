@@ -31,30 +31,25 @@ body {
   border-radius: 4px;
 }
 
-#ruleHeaders, #ruleOptionsGeneral, 
-#ruleOptionsPayload, #ruleOptionsNonPayload, 
-#ruleOptionsPostDetection {
+#ruleHeaders, #protocolSpecificOptions, #genericOptions, #contentSection, #regexSection, #postDetectionSection
+{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 80%;
   margin-left: 10%;
+  border: 1px solid #888888;
+  margin-bottom: 20px;
+}
+
+#protocolSpecificOptions {
+  border: none;
+  margin-bottom: 0px;
 }
 
 /* Specific Styles */
 #direction {
   width: 50px;
-}
-
-#ruleHeaders {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-#ruleOptionsGeneral, #ruleOptionsPayload, 
-#ruleOptionsNonPayload, #ruleOptionsPostDetection {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 #outputBox {
@@ -76,10 +71,6 @@ body {
   width: 280px;
 }
 
-#flowState, #flowDirection {
+#flowState, #flowDirection, #flowDirectionUDP {
   width: 150px;
-}
-
-#ruleHeaders, #ruleOptionsGeneral, #ruleOptionsPayload, #ruleOptionsNonPayload, #ruleOptionsPostDetection {
-  border: 1px solid #888888;
 }

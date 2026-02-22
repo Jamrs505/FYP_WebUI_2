@@ -11,7 +11,8 @@
 <body>
     <h1>Snort 3 Rule Helper</h1>
 
-    <div id="ruleHeaders"> <!-- Basic Inputs-->
+    <!-- Basic Inputs Section -->
+    <div id="ruleHeaders">
         <select class="basicBox" id="action">
             <option selected=true>Action</option>
             <option value="alert">alert</option>
@@ -29,224 +30,277 @@
             <option value="icmp">icmp</option>
             <option value="tcp">tcp</option>
             <option value="udp">udp</option>
-            <!-- Include service & file rules later if needed -->
         </select>
         <input class="basicBox" type="text" id="sourceIP" placeholder="source ip"></input>
         <input class="basicBox" type="text" id="sourcePort" placeholder="source port"></input>
         <select class="basicBox" id="direction">
             <option selected=true value="->">-></option>
-            <option value="<>">
-                <>
-            </option>
+            <option value="<>"><></option>
         </select>
         <input class="basicBox" type="text" id="destinationIP" placeholder="destination ip"></input>
         <input class="basicBox" type="text" id="destinationPort" placeholder="destination port"></input>
-
+        <input class="basicBoxShort" type="number" min="1" id="rev" placeholder="rev"></input>
+        <input class="basicBoxShort" type="number" min="0" id="sid" placeholder="sid"></input>
+        <input class="basicBoxLong" type="text" id="msg" placeholder="Rule message"></input>
+        <select class="basicBox" id="classtype">
+            <option selected=true>Classtype</option>
+            <option value="not-suspicious">Not Suspicious Traffic</option>
+            <option value="unknown">Unknown Traffic</option>
+            <option value="bad-unknown">Potentially Bad Traffic</option>
+            <option value="attempted-recon">Attempted Information Leak</option>
+            <option value="successful-recon-limited">Information Leak</option>
+            <option value="successful-recon-largescale">Large Scale Information Leak</option>
+            <option value="attempted-dos">Attempted Denial of Service</option>
+            <option value="successful-dos">Denial of Service</option>
+            <option value="attempted-user">Attempted User Privilege Gain</option>
+            <option value="unsuccessful-user">Unsuccessful User Privilege Gain</option>
+            <option value="successful-user">Successful User Privilege Gain</option>
+            <option value="attempted-admin">Attempted Administrator Privilege Gain</option>
+            <option value="successful-admin">Successful Administrator Privilege Gain</option>
+            <option value="rpc-portmap-decode">Decode of an RPC Query</option>
+            <option value="shellcode-detect">Executable code was detected</option>
+            <option value="string-detect">A suspicious string was detected</option>
+            <option value="suspicious-filename-detect">A suspicious filename was detected</option>
+            <option value="suspicious-login">An attempted login using a suspicious username was detected</option>
+            <option value="system-call-detect">A system call was detected</option>
+            <option value="tcp-connection">A TCP connection was detected</option>
+            <option value="trojan-activity">A Network Trojan was detected</option>
+            <option value="unusual-client-port-connection">A client was using an unusual port</option>
+            <option value="network-scan">Detection of a Network Scan</option>
+            <option value="denial-of-service">Detection of a Denial of Service Attack</option>
+            <option value="non-standard-protocol">Detection of a non-standard protocol or event</option>
+            <option value="protocol-command-decode">Generic Protocol Command Decode</option>
+            <option value="web-application-activity">Access to a potentially vulnerable web application</option>
+            <option value="web-application-attack">Web Application Attack</option>
+            <option value="misc-activity">Misc Activity</option>
+            <option value="misc-attack">Misc Attack</option>
+            <option value="icmp-event">Generic ICMP event</option>
+            <option value="inappropriate-content">Inappropriate Content was Detected</option>
+            <option value="policy-violation">Potential Corporate Privacy Violation</option>
+            <option value="default-login-attempt">Attempt to login by a default username and password</option>
+            <option value="sdf">Sensitive Data</option>
+            <option value="file-format">Known malicious file or file based exploit</option>
+            <option value="malware-cnc">Known malware command and control traffic</option>
+            <option value="client-side-exploit">Known client side exploit attempt</option>
+        </select>
+        <input class="basicBoxShort" type="number" min="1" max="2147483647" id="priority" placeholder="Priority"></input>
+        <input class="basicBoxShort" type="number" min="1" id="gid" placeholder="gid"></input>
     </div>
 
-    <div id="ruleOptions"> <!-- https://docs.snort.org/rules/options/ -->
-        <div id="ruleOptionsGeneral"> <!-- https://docs.snort.org/rules/options/general/ -->
-            <input class="basicBoxLong" type="text" id="msg" placeholder="Rule message"></input> <!-- long -->
-            <select class="basicBox" id="reference">
-                <!-- revisit this https://docs.snort.org/rules/options/general/reference -->
-                <option selected=true>Reference</option>
-                <option value="cve">cve</option>
-                <option value="bugtraq">bugtraq</option>
-                <option value="url">url</option>
-                <option value="cert">cert</option>
-                <option value="nessus">nessus</option>
-                <option value="metasploit">metasploit</option>
-            </select>
-            <input class="basicBox" type="text" id="referenceText" placeholder="reference"></input>
-            <input class="basicBoxShort" type="number" min="1" id="gid" placeholder="gid"></input>
-            <input class="basicBoxShort" type="number" min="0" id="sid" placeholder="sid"></input>
-            <input class="basicBoxShort" type="number" min="1" id="rev" placeholder="rev"></input>
-            <select class="basicBox" id="classtype">
-                <option selected=true>Classtype</option>
-                <option value="not-suspicious">Not Suspicious Traffic</option>
-                <option value="unknown">Unknown Traffic</option>
-                <option value="bad-unknown">Potentially Bad Traffic</option>
-                <option value="attempted-recon">Attempted Information Leak</option>
-                <option value="successful-recon-limited">Information Leak</option>
-                <option value="successful-recon-largescale">Large Scale Information Leak</option>
-                <option value="attempted-dos">Attempted Denial of Service</option>
-                <option value="successful-dos">Denial of Service</option>
-                <option value="attempted-user">Attempted User Privilege Gain</option>
-                <option value="unsuccessful-user">Unsuccessful User Privilege Gain</option>
-                <option value="successful-user">Successful User Privilege Gain</option>
-                <option value="attempted-admin">Attempted Administrator Privilege Gain</option>
-                <option value="successful-admin">Successful Administrator Privilege Gain</option>
-                <option value="rpc-portmap-decode">Decode of an RPC Query</option>
-                <option value="shellcode-detect">Executable code was detected</option>
-                <option value="string-detect">A suspicious string was detected</option>
-                <option value="suspicious-filename-detect">A suspicious filename was detected</option>
-                <option value="suspicious-login">An attempted login using a suspicious username was detected</option>
-                <option value="system-call-detect">A system call was detected</option>
-                <option value="tcp-connection">A TCP connection was detected</option>
-                <option value="trojan-activity">A Network Trojan was detected</option>
-                <option value="unusual-client-port-connection">A client was using an unusual port</option>
-                <option value="network-scan">Detection of a Network Scan</option>
-                <option value="denial-of-service">Detection of a Denial of Service Attack</option>
-                <option value="non-standard-protocol">Detection of a non-standard protocol or event</option>
-                <option value="protocol-command-decode">Generic Protocol Command Decode</option>
-                <option value="web-application-activity">Access to a potentially vulnerable web application</option>
-                <option value="web-application-attack">Web Application Attack</option>
-                <option value="misc-activity">Misc Activity</option>
-                <option value="misc-attack">Misc Attack</option>
-                <option value="icmp-event">Generic ICMP event</option>
-                <option value="inappropriate-content">Inappropriate Content was Detected</option>
-                <option value="policy-violation">Potential Corporate Privacy Violation</option>
-                <option value="default-login-attempt">Attempt to login by a default username and password</option>
-                <option value="sdf">Sensitive Data</option>
-                <option value="file-format">Known malicious file or file based exploit</option>
-                <option value="malware-cnc">Known malware command and control traffic</option>
-                <option value="client-side-exploit">Known client side exploit attempt</option>
-            </select>
-            <input class="basicBoxShort" type="number" min="1" max="2147483647" id="priority"
-                placeholder="Priority"></input>
-            <input class="basicBox" type="text" id="metadata" placeholder="metadata"></input>
-            <input class="basicBox" type="text" id="service" placeholder="service"></input>
-            <input class="basicBoxLong" type="text" id="rem" placeholder="Rule comment"></input>
+    <div id="ruleOptions">
+        <!-- Protocol Specific Options -->
+        <div hidden id="protocolSpecificOptions">
+            <!-- IP Options -->
+            <div hidden id="ipOptions">
+                <div id="ttlDiv">
+                    <input hidden class="basicBox" type="text" id="ttlStart" placeholder="ttl start"></input>
+                    <select class="basicBox" id="ttlOperator">
+                        <option selected=true>TTL</option>
+                        <option value="&gt;">&gt;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&equals;">&equals;</option>
+                        <option value="!">!</option>
+                        <option value="&gt;&equals;">&gt;&equals;</option>
+                        <option value="&lt;&equals;">&lt;&equals;</option>
+                        <option value="&lt;&gt;">&lt;&gt;</option>
+                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                    </select>
+                    <input class="basicBox" type="text" id="ttl" placeholder="ttl"></input>
+                </div>
+                <div id="ip_protoDiv">
+                    <input hidden class="basicBox" type="text" id="ip_protoStart" placeholder="ip_proto start"></input>
+                    <select class="basicBox" id="ip_protoOperator">
+                        <option selected=true>IP Protocol</option>
+                        <option value="&gt;">&gt;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&equals;">&equals;</option>
+                        <option value="!">!</option>
+                        <option value="&gt;&equals;">&gt;&equals;</option>
+                        <option value="&lt;&equals;">&lt;&equals;</option>
+                        <option value="&lt;&gt;">&lt;&gt;</option>
+                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                    </select>
+                    <input class="basicBox" type="text" id="ip_proto" placeholder="ip_proto"></input>
+                </div>
+            </div>
 
-            <div id="file_meta"></div> <!-- https://docs.snort.org/rules/options/general/file_meta -->
+            <!-- TCP Options -->
+            <div hidden id="tcpOptions">
+                <div id="http_methodDiv">
+                    <select class="basicBox" id="http_method"> 
+                        <option selected=true>HTTP Method</option>
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="OPTIONS">OPTIONS</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PUT">PUT</option>
+                        <option value="TRACE">TRACE</option>
+                        <option value="CONNECT">CONNECT</option>
+                    </select>
+                </div>
+                <div id="http_stat_codeDiv">
+                    <select class="basicBox" id="http_stat_code">
+                        <option selected=true>HTTP Status Code</option>
+                        <option value="100">100 Continue</option>
+                        <option value="101">101 Switching Protocols</option>
+                        <option value="102">102 Processing</option>
+                        <option value="103">103 Early Hints</option>
+                        <option value="200">200 OK</option>
+                        <option value="201">201 Created</option>
+                        <option value="202">202 Accepted</option>
+                        <option value="203">203 Non-Authoritative Information</option>
+                        <option value="204">204 No Content</option>
+                        <option value="205">205 Reset Content</option>
+                        <option value="206">206 Partial Content</option>
+                        <option value="207">207 Multi-Status</option>
+                        <option value="208">208 Already Reported</option>
+                        <option value="226">226 IM Used</option>
+                        <option value="300">300 Multiple Choices</option>
+                        <option value="301">301 Moved Permanently</option>
+                        <option value="302">302 Found</option>
+                        <option value="303">303 See Other</option>
+                        <option value="304">304 Not Modified</option>
+                        <option value="305">305 Use Proxy</option>
+                        <option value="307">307 Temporary Redirect</option>
+                        <option value="308">308 Permanent Redirect</option>
+                        <option value="400">400 Bad Request</option>
+                        <option value="401">401 Unauthorized</option>
+                        <option value="402">402 Payment Required</option>
+                        <option value="403">403 Forbidden</option>
+                        <option value="404">404 Not Found</option>
+                        <option value="405">405 Method Not Allowed</option>
+                        <option value="406">406 Not Acceptable</option>
+                        <option value="407">407 Proxy Authentication Required</option>
+                        <option value="408">408 Request Timeout</option>
+                        <option value="409">409 Conflict</option>
+                        <option value="410">410 Gone</option>
+                        <option value="411">411 Length Required</option>
+                        <option value="412">412 Precondition Failed</option>
+                        <option value="413">413 Payload Too Large</option>
+                        <option value="414">414 URI Too Long</option>
+                        <option value="415">415 Unsupported Media Type</option>
+                        <option value="416">416 Range Not Satisfiable</option>
+                        <option value="417">417 Expectation Failed</option>
+                        <option value="418">418 I'm a teapot</option>
+                        <option value="421">421 Misdirected Request</option>
+                        <option value="422">422 Unprocessable Entity</option>
+                        <option value="423">423 Locked</option>
+                        <option value="424">424 Failed Dependency</option>
+                        <option value="425">425 Too Early</option>
+                        <option value="426">426 Upgrade Required</option>
+                        <option value="428">428 Precondition Required</option>
+                        <option value="429">429 Too Many Requests</option>
+                        <option value="431">431 Request Header Fields Too Large</option>
+                        <option value="451">451 Unavailable For Legal Reasons</option>
+                        <option value="500">500 Internal Server Error</option>
+                        <option value="501">501 Not Implemented</option>
+                        <option value="502">502 Bad Gateway</option>
+                        <option value="503">503 Service Unavailable</option>
+                        <option value="504">504 Gateway Timeout</option>
+                        <option value="505">505 HTTP Version Not Supported</option>
+                        <option value="506">506 Variant Also Negotiates</option>
+                        <option value="507">507 Insufficient Storage</option>
+                        <option value="508">508 Loop Detected</option>
+                        <option value="510">510 Not Extended</option>
+                        <option value="511">511 Network Authentication Required</option>
+                    </select>
+                </div>
+                <div id="flagsDiv">
+                    <label for="flagFIN">FIN</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagFIN"></input>
+                    <label for="flagSYN">SYN</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagSYN"></input>
+                    <label for="flagRST">RST</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagRST"></input>
+                    <label for="flagPSH">PSH</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagPSH"></input>
+                    <label for="flagACK">ACK</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagACK"></input>
+                    <label for="flagURG">URG</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagURG"></input>
+                    <label for="flagCWR">CWR</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagCWR"></input>
+                    <label for="flagECE">ECE</label>
+                    <input class="basicBoxShort" type="checkbox" id="flagECE"></input>
+                    <label for="flag0">None</label>
+                    <input class="basicBoxShort" type="checkbox" id="flag0"></input>
+                    <label for="flag+">+</label>
+                    <input class="basicBoxShort" type="checkbox" id="flag+"></input>
+                    <label for="flag*">*</label>
+                    <input class="basicBoxShort" type="checkbox" id="flag*"></input>
+                    <label for="flag!">!</label>
+                    <input class="basicBoxShort" type="checkbox" id="flag!"></input>
+                </div>
+                <div id="flowDiv">
+                    <select class="basicBox" id="flowState">
+                        <option selected=true>Flow State</option>
+                        <option value="established">established</option>
+                        <option value="not_established">not_established</option>
+                        <option value="stateless">stateless</option>
+                    </select>
+                    <select class="basicBox" id="flowDirection">
+                        <option selected=true>Flow Direction</option>
+                        <option value="to_client">to_client</option>
+                        <option value="to_server">to_server</option>
+                        <option value="from_client">from_client</option>
+                        <option value="from_server">from_server</option>
+                    </select>
+                </div>
+            </div>
 
+            <!-- UDP Options -->
+            <div hidden id="udpOptions">
+                <div id="flowDivUDP">
+                    <select class="basicBox" id="flowDirectionUDP">
+                        <option selected=true>Flow Direction</option>
+                        <option value="to_client">to_client</option>
+                        <option value="to_server">to_server</option>
+                        <option value="from_client">from_client</option>
+                        <option value="from_server">from_server</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ICMP Options -->
+            <div hidden id="icmpOptions">
+                <div id="itypeDiv">
+                    <input hidden class="basicBox" type="number" min="0" max="254" id="itypeStart" placeholder="itype start"></input>
+                    <select class="basicBox" id="itypeOperator">
+                        <option selected=true>ICMP Type</option>
+                        <option value="&gt;">&gt;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&equals;">&equals;</option>
+                        <option value="!">!</option>
+                        <option value="&gt;&equals;">&gt;&equals;</option>
+                        <option value="&lt;&equals;">&lt;&equals;</option>
+                        <option value="&lt;&gt;">&lt;&gt;</option>
+                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                    </select>
+                    <input class="basicBox" type="number" min="0" max="255" id="itype" placeholder="itype"></input>
+                </div>
+                <div id="icodeDiv">
+                    <input hidden class="basicBox" type="number" min="0" max="254" id="icodeStart" placeholder="icode start"></input>
+                    <select class="basicBox" id="icodeOperator">
+                        <option selected=true>ICMP Code</option>
+                        <option value="&gt;">&gt;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&equals;">&equals;</option>
+                        <option value="!">!</option>
+                        <option value="&gt;&equals;">&gt;&equals;</option>
+                        <option value="&lt;&equals;">&lt;&equals;</option>
+                        <option value="&lt;&gt;">&lt;&gt;</option>
+                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
+                    </select>
+                    <input class="basicBox" type="number" min="0" max="255" id="icode" placeholder="icode"></input>
+                </div>
+            </div>
         </div>
 
-        <div id="ruleOptionsPayload">
-            <div id="contentDiv">
-                <input class="basicBoxLong" type="text" id="content" placeholder="content"></input>
-                <label for="fast_pattern">fast_pattern</label>
-                <input class="basicBoxShort" type="checkbox" id="fast_pattern"></input>
-                <label for="nocase">nocase</label>
-                <input class="basicBoxShort" type="checkbox" id="nocase"></input>
-
-                <input class="basicBox" type="text" id="width" placeholder="width"></input> <!-- Integer -->
-                <select class="basicBox" id="endian">
-                    <option selected=true>endian</option>
-                    <option value="big">big</option>
-                    <option value="little">little</option>
-                </select>
-                <input class="basicBox" type="text" id="offset" placeholder="offset"></input> <!-- Integer -->
-                <input class="basicBox" type="text" id="depth" placeholder="depth"></input> <!-- Integer -->
-                <input class="basicBox" type="text" id="distance" placeholder="distance"></input> <!-- Integer -->
-                <input class="basicBox" type="text" id="within" placeholder="within"></input> <!-- Integer -->
-            </div>
-
-            <div id="HTTP buffers"> <!-- https://docs.snort.org/rules/options/payload/http/ -->
-                <div id="http_uri"></div> <!-- Consider adding, unlikely -->
-                <input class="basicBox" type="text" id="http_uri" placeholder="HTTP URI"></input>
-                
-                <div id="http_method"></div> <!-- Must Include!!! -->
-                <select class="basicBox" id="http_method"> 
-                    <option selected=true>HTTP Method</option>
-                    <option value="GET">GET</option>
-                    <option value="POST">POST</option>
-                    <option value="OPTIONS">OPTIONS</option>
-                    <option value="HEAD">HEAD</option>
-                    <option value="DELETE">DELETE</option>
-                    <option value="PUT">PUT</option>
-                    <option value="TRACE">TRACE</option>
-                    <option value="CONNECT">CONNECT</option>
-                </select>
-                <div id="http_stat_code"></div> <!-- Must Include!!! -->
-                <select class="basicBox" id="http_stat_code">
-                    <option selected=true>HTTP Status Code</option>
-                    <option value="100">100 Continue</option>
-                    <option value="101">101 Switching Protocols</option>
-                    <option value="102">102 Processing</option>
-                    <option value="103">103 Early Hints</option>
-                    <option value="200">200 OK</option>
-                    <option value="201">201 Created</option>
-                    <option value="202">202 Accepted</option>
-                    <option value="203">203 Non-Authoritative Information</option>
-                    <option value="204">204 No Content</option>
-                    <option value="205">205 Reset Content</option>
-                    <option value="206">206 Partial Content</option>
-                    <option value="207">207 Multi-Status</option>
-                    <option value="208">208 Already Reported</option>
-                    <option value="226">226 IM Used</option>
-                    <option value="300">300 Multiple Choices</option>
-                    <option value="301">301 Moved Permanently</option>
-                    <option value="302">302 Found</option>
-                    <option value="303">303 See Other</option>
-                    <option value="304">304 Not Modified</option>
-                    <option value="305">305 Use Proxy</option>
-                    <option value="307">307 Temporary Redirect</option>
-                    <option value="308">308 Permanent Redirect</option>
-                    <option value="400">400 Bad Request</option>
-                    <option value="401">401 Unauthorized</option>
-                    <option value="402">402 Payment Required</option>
-                    <option value="403">403 Forbidden</option>
-                    <option value="404">404 Not Found</option>
-                    <option value="405">405 Method Not Allowed</option>
-                    <option value="406">406 Not Acceptable</option>
-                    <option value="407">407 Proxy Authentication Required</option>
-                    <option value="408">408 Request Timeout</option>
-                    <option value="409">409 Conflict</option>
-                    <option value="410">410 Gone</option>
-                    <option value="411">411 Length Required</option>
-                    <option value="412">412 Precondition Failed</option>
-                    <option value="413">413 Payload Too Large</option>
-                    <option value="414">414 URI Too Long</option>
-                    <option value="415">415 Unsupported Media Type</option>
-                    <option value="416">416 Range Not Satisfiable</option>
-                    <option value="417">417 Expectation Failed</option>
-                    <option value="418">418 I'm a teapot</option>
-                    <option value="421">421 Misdirected Request</option>
-                    <option value="422">422 Unprocessable Entity</option>
-                    <option value="423">423 Locked</option>
-                    <option value="424">424 Failed Dependency</option>
-                    <option value="425">425 Too Early</option>
-                    <option value="426">426 Upgrade Required</option>
-                    <option value="428">428 Precondition Required</option>
-                    <option value="429">429 Too Many Requests</option>
-                    <option value="431">431 Request Header Fields Too Large</option>
-                    <option value="451">451 Unavailable For Legal Reasons</option>
-                    <option value="500">500 Internal Server Error</option>
-                    <option value="501">501 Not Implemented</option>
-                    <option value="502">502 Bad Gateway</option>
-                    <option value="503">503 Service Unavailable</option>
-                    <option value="504">504 Gateway Timeout</option>
-                    <option value="505">505 HTTP Version Not Supported</option>
-                    <option value="506">506 Variant Also Negotiates</option>
-                    <option value="507">507 Insufficient Storage</option>
-                    <option value="508">508 Loop Detected</option>
-                    <option value="510">510 Not Extended</option>
-                    <option value="511">511 Network Authentication Required</option>
-                </select>
-
-                <!-- consider adding a limited amount of options -->
-            </div>
-
-            <div id="bufferlenDiv">
-                <input hidden class="basicBox" type="text" id="bufferlenStart" placeholder="bufferlen start"></input>
-                <select class="basicBox" id="bufferlenOperator">
-                    <option selected=true>Buffer Length</option>
-                    <option value="&gt;">&gt;</option>
-                    <option value="&lt;">&lt;</option>
-                    <option value="&equals;">&equals;</option>
-                    <option value="!">!</option>
-                    <option value="&gt;&equals;">&gt;&equals;</option>
-                    <option value="&lt;&equals;">&lt;&equals;</option>
-                    <option value="&lt;&gt;">&lt;&gt;</option>
-                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
-                </select>
-                <input class="basicBox" type="text" id="bufferlen" placeholder="bufferlen"></input>
-                <label for="bufferlenRelative">relative</label>
-                <input class="basicBoxShort" type="checkbox" id="bufferlenRelative"></input>
-            </div>
-
-            <div id="isdataatDiv">
-                <label for="isdataatNotOperator">!</label>
-                <input class="basicBoxShort" type="checkbox" id="isdataatNotOperator"></input>
-                <input class="basicBox" type="number" min="0" max="65535" id="isdataat" placeholder="isdataat"></input>
-                <label for="isdataatRelative">relative</label>
-                <input class="basicBoxShort" type="checkbox" id="isdataatRelative"></input>
-            </div>
-
+        <!-- Generic Options -->
+        <div id="genericOptions">
             <div id="dsizeDiv">
-                <input hidden class="basicBox" type="number" min="0" max="65535" id="dsizeStart"
-                    placeholder="dsize start"></input>
+                <input hidden class="basicBox" type="number" min="0" max="65535" id="dsizeStart" placeholder="dsize start"></input>
                 <select class="basicBox" id="dsizeOperator">
                     <option selected=true>Data Size</option>
                     <option value="&gt;">&gt;</option>
@@ -261,6 +315,50 @@
                 <input class="basicBox" type="number" min="0" max="65535" id="dsize" placeholder="dsize"></input>
             </div>
 
+            <div id="referenceDiv">
+                <select class="basicBox" id="reference">
+                    <option selected=true>Reference</option>
+                    <option value="cve">cve</option>
+                    <option value="bugtraq">bugtraq</option>
+                    <option value="url">url</option>
+                    <option value="cert">cert</option>
+                    <option value="nessus">nessus</option>
+                    <option value="metasploit">metasploit</option>
+                </select>
+                <input class="basicBox" type="text" id="referenceText" placeholder="reference"></input>
+            </div>
+
+            <div id="serviceDiv">
+                <select class="basicBox" id="service">
+                    <option selected=true>Service</option>
+                    <option value="ftp">ftp</option>
+                    <option value="http">http</option>
+                    <option value="imap">imap</option>
+                    <option value="pop3">pop3</option>
+                    <option value="sip">sip</option>
+                    <option value="smtp">smtp</option>
+                    <option value="ssh">ssh</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div id="contentSection">
+            <div id="contentDiv">
+                <input class="basicBoxLong" type="text" id="content" placeholder="content"></input>
+                <label for="fast_pattern">fast_pattern</label>
+                <input class="basicBoxShort" type="checkbox" id="fast_pattern"></input>
+                <label for="nocase">nocase</label>
+                <input class="basicBoxShort" type="checkbox" id="nocase"></input>
+                <label for="http_uri">http_uri</label>
+                <input class="basicBoxShort" type="checkbox" id="http_uri"></input>
+                <input class="basicBox" type="text" id="offset" placeholder="offset"></input>
+                <input class="basicBox" type="text" id="depth" placeholder="depth"></input>
+            </div>
+        </div>
+
+        <!-- Regex Section -->
+        <div id="regexSection">
             <div id="pcreDiv">
                 <input class="basicBoxLong" type="text" id="pcre" placeholder="pcre"></input>
                 <label for="pcreFast_pattern">fast_pattern</label>
@@ -268,107 +366,24 @@
                 <label for="pcreNocase">nocase</label>
                 <input class="basicBoxShort" type="checkbox" id="pcreNocase"></input>
             </div>
-
         </div>
 
-        <div id="ruleOptionsNonPayload"> <!-- https://docs.snort.org/rules/options/non_payload/ -->
-            <div id="ttlDiv">
-                <input class="basicBox" type="text" id="ttl" placeholder="ttl"></input>
-            </div>
-            <div id="ip_protoDiv">
-                <input class="basicBox" type="text" id="ip_proto" placeholder="ip_proto"></input>
-            </div> 
-            <div id="flagsDiv">
-                <label for="flagFIN">FIN</label>
-                <input class="basicBoxShort" type="checkbox" id="flagFIN"></input>
-                <label for="flagSYN">SYN</label>
-                <input class="basicBoxShort" type="checkbox" id="flagSYN"></input>
-                <label for="flagRST">RST</label>
-                <input class="basicBoxShort" type="checkbox" id="flagRST"></input>
-                <label for="flagPSH">PSH</label>
-                <input class="basicBoxShort" type="checkbox" id="flagPSH"></input>
-                <label for="flagACK">ACK</label>
-                <input class="basicBoxShort" type="checkbox" id="flagACK"></input>
-                <label for="flagURG">URG</label>
-                <input class="basicBoxShort" type="checkbox" id="flagURG"></input>
-                <label for="flagCWR">CWR</label>
-                <input class="basicBoxShort" type="checkbox" id="flagCWR"></input>
-                <label for="flagECE">ECE</label>
-                <input class="basicBoxShort" type="checkbox" id="flagECE"></input>
-                <label for="flag0">None</label>
-                <input class="basicBoxShort" type="checkbox" id="flag0"></input>
-                <label for="flag+">+</label>
-                <input class="basicBoxShort" type="checkbox" id="flag+"></input>
-                <label for="flag*">*</label>
-                <input class="basicBoxShort" type="checkbox" id="flag*"></input>
-                <label for="flag!">!</label>
-                <input class="basicBoxShort" type="checkbox" id="flag!"></input>
-            </div>
-            <div id="flowDiv">
-                <select class="basicBox" id="flowState">
-                    <option selected=true>Flow State</option>
-                    <option value="established">established</option>
-                    <option value="not_established">not_established</option>
-                    <option value="stateless">stateless</option>
-                </select>
-                <select class="basicBox" id="flowDirection">
-                    <option selected=true>Flow Direction</option>
-                    <option value="to_client">to_client</option>
-                    <option value="to_server">to_server</option>
-                    <option value="from_client">from_client</option>
-                    <option value="from_server">from_server</option>
-                </select>
-            </div>
-            <div id="itypeDiv">
-                <input hidden class="basicBox" type="number" min="0" max="254" id="itypeStart"
-                    placeholder="itype start"></input>
-                <select class="basicBox" id="itypeOperator">
-                    <option selected=true>ITYPE Operator</option>
-                    <option value="&gt;">&gt;</option>
-                    <option value="&lt;">&lt;</option>
-                    <option value="&equals;">&equals;</option>
-                    <option value="!">!</option>
-                    <option value="&gt;&equals;">&gt;&equals;</option>
-                    <option value="&lt;&equals;">&lt;&equals;</option>
-                    <option value="&lt;&gt;">&lt;&gt;</option>
-                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
-                </select>
-                <input class="basicBox" type="number" min="0" max="255" id="itype" placeholder="itype"></input>
-            </div>
-            <div id="icodeDiv">
-                <input hidden class="basicBox" type="number" min="0" max="254" id="icodeStart"
-                    placeholder="icode start"></input>
-                <select class="basicBox" id="icodeOperator">
-                    <option selected=true>ICODE Operator</option>
-                    <option value="&gt;">&gt;</option>
-                    <option value="&lt;">&lt;</option>
-                    <option value="&equals;">&equals;</option>
-                    <option value="!">!</option>
-                    <option value="&gt;&equals;">&gt;&equals;</option>
-                    <option value="&lt;&equals;">&lt;&equals;</option>
-                    <option value="&lt;&gt;">&lt;&gt;</option>
-                    <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
-                </select>
-                <input class="basicBox" type="number" min="0" max="255" id="icode" placeholder="icode"></input>
-            </div>
-
-        </div>
-
-        <div id="ruleOptionsPostDetection"> <!-- https://docs.snort.org/rules/options/post/ -->
+        <!-- Post Detection Section -->
+        <div id="postDetectionSection">
             <div id="detection_filter">
-                <input class="basicBox" type="text" id="detection_filterTrack" placeholder="detection filter track"></input>
+                <label for="detection_filterTrack">Detection Filter</label>
                 <select class="basicBox" id="detection_filterTrack">
                     <option selected=true>Track by</option>
                     <option value="by_src">source</option>
                     <option value="by_dst">destination</option>
                 </select>
-                <input class="basicBox" type="number" min="1" id="detection_filterCount" placeholder="detection filter count"></input>
-                <input class="basicBox" type="number" min="1" id="detection_filterSeconds" placeholder="detection filter seconds"></input>
+                <input class="basicBox" type="number" min="1" id="detection_filterCount" placeholder="count"></input>
+                <input class="basicBox" type="number" min="1" id="detection_filterSeconds" placeholder="seconds"></input>
             </div>
         </div>
+
     </div>
 
-    <p></p>
     <div id="outputBox">
         <input type="text" name="outputText" id="outputText" readonly></input>
     </div>

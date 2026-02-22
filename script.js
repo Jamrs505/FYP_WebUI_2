@@ -23,33 +23,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const rev = document.getElementById('rev').value;
         const classtype = document.getElementById('classtype').value;
         const priority = document.getElementById('priority').value;
-        const metadata = document.getElementById('metadata').value;
         const service = document.getElementById('service').value;
-        const rem = document.getElementById('rem').value;
 
         //ruleOptionsPayload
         const content = document.getElementById('content').value;
         const fast_pattern = document.getElementById('fast_pattern').checked;
         const nocase = document.getElementById('nocase').checked;
-        const width = document.getElementById('width').value;
-        const endian = document.getElementById('endian').value;
         const offset = document.getElementById('offset').value;
         const depth = document.getElementById('depth').value;
-        const distance = document.getElementById('distance').value;
-        const within = document.getElementById('within').value;
-
-        const bufferlenOperator = document.getElementById('bufferlenOperator').value;
-        const bufferlen = document.getElementById('bufferlen').value;
-        const bufferlenStart = document.getElementById('bufferlenStart').value;
-        const bufferlenRelative = document.getElementById('bufferlenRelative').checked;
-
-        const isdataatNotOperator = document.getElementById('isdataatNotOperator').checked;
-        const isdataat = document.getElementById('isdataat').value;
-        const isdataatRelative = document.getElementById('isdataatRelative').checked;
 
         const dsizeOperator = document.getElementById('dsizeOperator').value;
         const dsize = document.getElementById('dsize').value;
         const dsizeStart = document.getElementById('dsizeStart').value;
+
+        const ttlOperator = document.getElementById('ttlOperator').value;
+        const ttl = document.getElementById('ttl').value;
+        const ttlStart = document.getElementById('ttlStart').value;
+
+        const ip_protoOperator = document.getElementById('ip_protoOperator').value;
+        const ip_proto = document.getElementById('ip_proto').value;
+        const ip_protoStart = document.getElementById('ip_protoStart').value;
+
+        const itypeOperator = document.getElementById('itypeOperator').value;
+        const itype = document.getElementById('itype').value;
+        const itypeStart = document.getElementById('itypeStart').value;
+
+        const icodeOperator = document.getElementById('icodeOperator').value;
+        const icode = document.getElementById('icode').value;
+        const icodeStart = document.getElementById('icodeStart').value;
 
         const pcre = document.getElementById('pcre').value;
         const pcreFast_pattern = document.getElementById('pcreFast_pattern').checked;
@@ -67,9 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (rev) rule += `rev:${rev}; `;
         if (classtype !== "Classtype") rule += `classtype:${classtype}; `;
         if (priority) rule += `priority:${priority}; `;
-        if (metadata) rule += `metadata:${metadata}; `;
         if (service) rule += `service:${service}; `;
-        if (rem) rule += `rem:"${rem}"; `;
 
         //Content options
         if (content) {
@@ -90,17 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (within) rule += `, within:${within}`;
             rule += '; ';
 
-            if (bufferlen) {
-                if (bufferlenOperator === '<>' || bufferlenOperator === '<=>') {
-                    rule += `bufferlen:${bufferlenStart}${bufferlenOperator}${bufferlen}`;
-                }
-                else {
-                    rule += `bufferlen:${bufferlen}`;
-                }
-                if (bufferlenRelative) rule += `,relative`;
-                rule += '; ';
-            }
-
             if (dsize) {
                 if (dsizeOperator === '<>' || dsizeOperator === '<=>') {
                     rule += `dsize:${dsizeStart}${dsizeOperator}${dsize}`;
@@ -113,37 +101,95 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         }
-        
+
         if (pcre) {
-                rule += `pcre:"${pcre}"`;
-                if (pcreFast_pattern) rule += ', fast_pattern';
-                if (pcreNocase) rule += ', nocase';
-                rule += '; ';
-            }
+            rule += `pcre:"${pcre}"`;
+            if (pcreFast_pattern) rule += ', fast_pattern';
+            if (pcreNocase) rule += ', nocase';
+            rule += '; ';
+        }
 
         rule += ')';
 
+        //Clear output if essential fields are not selected
         if (action === 'Action' || protocol === 'Protocol') {
-            outputField.value = ''; // Clear output if essential fields are not selected
+            outputField.value = '';
         } else {
             outputField.value = rule;
         }
 
-
-        // Hide or show bufferlenStart based on bufferlen operator
-        if (bufferlenOperator == '<>' || bufferlenOperator == '<=>') {
-            document.getElementById('bufferlenStart').hidden = false;
-        } else {
-            document.getElementById('bufferlenStart').hidden = true;
-        }
-
-        // Hide or show dsizeStart based on dsize operator
+        //Hide or show dsizeStart based on dsize operator
         if (dsizeOperator == '<>' || dsizeOperator == '<=>') {
             document.getElementById('dsizeStart').hidden = false;
         } else {
             document.getElementById('dsizeStart').hidden = true;
         }
 
+        //Hide or show ttlStart based on ttl operator
+        if (ttlOperator == '<>' || ttlOperator == '<=>') {
+            document.getElementById('ttlStart').hidden = false;
+        } else {
+            document.getElementById('ttlStart').hidden = true;
+        }
+
+        //Hide or show ip_protoStart based on ip_proto operator
+        if (ip_protoOperator == '<>' || ip_protoOperator == '<=>') {
+            document.getElementById('ip_protoStart').hidden = false;
+        } else {
+            document.getElementById('ip_protoStart').hidden = true;
+        }
+
+        //Hide or show itypeStart based on itype operator
+        if (itypeOperator == '<>' || itypeOperator == '<=>') {
+            document.getElementById('itypeStart').hidden = false;
+        } else {
+            document.getElementById('itypeStart').hidden = true;
+        }
+
+        //Hide or show icodeStart based on icode operator
+        if (icodeOperator == '<>' || icodeOperator == '<=>') {
+            document.getElementById('icodeStart').hidden = false;
+        } else {
+            document.getElementById('icodeStart').hidden = true;
+        }
+
+
+        //Hide or shown protcol specific options based on protocol selection
+        console.log(protocol); //Testing
+        if (protocol !== 'Protocol') {
+            document.getElementById('protocolSpecificOptions').hidden = false;
+            document.getElementById('protocolSpecificOptions').style.border = '1px solid #888888';
+            document.getElementById('protocolSpecificOptions').style.marginBottom = '20px';
+            if (protocol === 'ip') {
+                document.getElementById('ipOptions').hidden = false;
+                document.getElementById('tcpOptions').hidden = true;
+                document.getElementById('udpOptions').hidden = true;
+                document.getElementById('icmpOptions').hidden = true;
+            } else if (protocol === 'tcp') {
+                document.getElementById('ipOptions').hidden = true;
+                document.getElementById('tcpOptions').hidden = false;
+                document.getElementById('udpOptions').hidden = true;
+                document.getElementById('icmpOptions').hidden = true;
+            } else if (protocol === 'udp') {
+                document.getElementById('ipOptions').hidden = true;
+                document.getElementById('tcpOptions').hidden = true;
+                document.getElementById('udpOptions').hidden = false;
+                document.getElementById('icmpOptions').hidden = true;
+            } else if (protocol === 'icmp') {
+                document.getElementById('ipOptions').hidden = true;
+                document.getElementById('tcpOptions').hidden = true;
+                document.getElementById('udpOptions').hidden = true;
+                document.getElementById('icmpOptions').hidden = false;
+            }
+        } else {
+            document.getElementById('protocolSpecificOptions').hidden = true;
+            document.getElementById('ipOptions').hidden = true;
+            document.getElementById('tcpOptions').hidden = true;
+            document.getElementById('udpOptions').hidden = true;
+            document.getElementById('icmpOptions').hidden = true;
+            document.getElementById('protocolSpecificOptions').style.border = 'none';
+            document.getElementById('protocolSpecificOptions').style.marginBottom = '0px';
+        }
     }
 
     inputs.forEach(input => {
