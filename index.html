@@ -93,7 +93,7 @@
             <!-- IP Options -->
             <div hidden id="ipOptions">
                 <div id="ttlDiv">
-                    <input hidden class="basicBox" type="text" id="ttlStart" placeholder="ttl start"></input>
+                    <input hidden class="basicBox" type="number" min="0" max="254" id="ttlStart" placeholder="ttl start"></input>
                     <select class="basicBox" id="ttlOperator">
                         <option selected=true>TTL</option>
                         <option value="&gt;">&gt;</option>
@@ -105,20 +105,14 @@
                         <option value="&lt;&gt;">&lt;&gt;</option>
                         <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
                     </select>
-                    <input class="basicBox" type="text" id="ttl" placeholder="ttl"></input>
+                    <input class="basicBox" type="number" min="0" max="255"  id="ttl" placeholder="ttl"></input>
                 </div>
                 <div id="ip_protoDiv">
-                    <input hidden class="basicBox" type="text" id="ip_protoStart" placeholder="ip_proto start"></input>
                     <select class="basicBox" id="ip_protoOperator">
                         <option selected=true>IP Protocol</option>
                         <option value="&gt;">&gt;</option>
                         <option value="&lt;">&lt;</option>
-                        <option value="&equals;">&equals;</option>
                         <option value="!">!</option>
-                        <option value="&gt;&equals;">&gt;&equals;</option>
-                        <option value="&lt;&equals;">&lt;&equals;</option>
-                        <option value="&lt;&gt;">&lt;&gt;</option>
-                        <option value="&lt;&equals;&gt;">&lt;&equals;&gt;</option>
                     </select>
                     <input class="basicBox" type="text" id="ip_proto" placeholder="ip_proto"></input>
                 </div>
@@ -361,10 +355,24 @@
         <div id="regexSection">
             <div id="pcreDiv">
                 <input class="basicBoxLong" type="text" id="pcre" placeholder="pcre"></input>
-                <label for="pcreFast_pattern">fast_pattern</label>
-                <input class="basicBoxShort" type="checkbox" id="pcreFast_pattern"></input>
-                <label for="pcreNocase">nocase</label>
-                <input class="basicBoxShort" type="checkbox" id="pcreNocase"></input>
+                <label for="pcreFlagi">case insensitive</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagi"></input>
+                <label for="pcreFlags">dot newline</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlags"></input>
+                <label for="pcreFlagm">multiline</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagm"></input>
+                <label for="pcreFlagx">ignore whitespace</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagx"></input>
+                <label for="pcreFlagA">start of buffer</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagA"></input>
+                <label for="pcreFlagE">end of buffer</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagE"></input>
+                <label for="pcreFlagG">invert greedy</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagG"></input>
+                <label for="pcreFlagO">override limit</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagO"></input>
+                <label for="pcreFlagR">from last match</label>
+                <input class="basicBoxShort" type="checkbox" id="pcreFlagR"></input>
             </div>
         </div>
 
@@ -386,6 +394,7 @@
 
     <div id="outputBox">
         <input type="text" name="outputText" id="outputText" readonly></input>
+        <span hidden id="copiedMsg">Copied to Clipboard</span>
     </div>
 
     <script src="script.js"></script>
