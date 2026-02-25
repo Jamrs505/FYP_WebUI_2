@@ -31,20 +31,71 @@ body {
   border-radius: 4px;
 }
 
-#ruleHeaders, #protocolSpecificOptions, #genericOptions, #contentSection, #regexSection, #postDetectionSection
-{
+/* Box containers: add padding, spacing and titles */
+#ruleHeaders, #protocolSpecificOptions, #genericOptions, #contentSection, #regexSection, #postDetectionSection, #outputBox {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  width: 80%;
-  margin-left: 10%;
-  border: 1px solid #888888;
-  margin-bottom: 20px;
+  width: 90%;
+  margin-left: 5%;
+  border: 2px solid #acacac;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  gap: 5px;
 }
 
-#protocolSpecificOptions {
-  border: none;
-  margin-bottom: 0px;
+#ipOptions, #tcpOptions, #udpOptions, #icmpOptions {
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+/* Title at top of each box */
+.boxTitle {
+  width: 100%;
+  margin: 0 0 8px 0;
+  color: #333333;
+  text-align: left;
+}
+
+/* Checkbox item grouping and styling */
+.checkboxItem {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 16px;
+}
+
+/* Make checkboxes easier to click and clearer visually */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0b76ef;
+}
+
+/* Improve spacing inside basic boxes (reduced) */
+.basicBox, .basicBoxShort, .basicBoxLong {
+  padding: 4px 6px;
+  margin: 3px;
+}
+
+/* Grouped controls: keep related controls close together, groups separated */
+#dsizeDiv, #ttlDiv, #ip_protoDiv, #http_methodDiv, #http_stat_codeDiv, #flagsDiv, #flowDiv, #flowDivUDP, #itypeDiv, #icodeDiv, #referenceDiv, #serviceDiv, #contentDiv, #pcreDiv, #detection_filter {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* close spacing inside group */
+  margin-right: 18px; /* larger gap between groups */
+}
+
+/* Make sure grouped inputs are centered together */
+#ruleHeaders > *, #protocolSpecificOptions > *, #genericOptions > *, #contentSection > *, #regexSection > *, #postDetectionSection > * {
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Specific Styles */
@@ -52,15 +103,12 @@ body {
   width: 50px;
 }
 
-#outputBox {
-  margin-top: 20px;
-}
 #outputText {
-  width: 80%;
+  width: 100%;
   height: 50px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0px;
+  border: none;
+  background-color: transparent;
 }
 
 #http_method {
@@ -89,4 +137,16 @@ body {
   pointer-events: none;
   white-space: nowrap;
   box-shadow: 0 5x 20px rgba(0, 0, 0, 0.25);
+}
+
+.desktop-break {
+  display: none;
+}
+
+@media screen and (min-width: 1660px) {
+  .desktop-break {
+    display: block;
+    flex-basis: 100%;
+    height: 0;
+  }
 }

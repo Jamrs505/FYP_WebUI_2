@@ -273,38 +273,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        //Hide or shown protcol specific options based on protocol selection
+        // Hide or show protocol specific options based on protocol selection
         if (protocol !== 'Protocol') {
-            document.getElementById('protocolSpecificOptions').hidden = false;
-            document.getElementById('protocolSpecificOptions').style.border = '1px solid #888888';
-            document.getElementById('protocolSpecificOptions').style.marginBottom = '20px';
-            if (protocol === 'ip') {
-                document.getElementById('ipOptions').hidden = false;
-                document.getElementById('tcpOptions').hidden = true;
-                document.getElementById('udpOptions').hidden = true;
-                document.getElementById('icmpOptions').hidden = true;
-            } else if (protocol === 'tcp') {
-                document.getElementById('ipOptions').hidden = true;
-                document.getElementById('tcpOptions').hidden = false;
-                document.getElementById('udpOptions').hidden = true;
-                document.getElementById('icmpOptions').hidden = true;
-            } else if (protocol === 'udp') {
-                document.getElementById('ipOptions').hidden = true;
-                document.getElementById('tcpOptions').hidden = true;
-                document.getElementById('udpOptions').hidden = false;
-                document.getElementById('icmpOptions').hidden = true;
-            } else if (protocol === 'icmp') {
-                document.getElementById('ipOptions').hidden = true;
-                document.getElementById('tcpOptions').hidden = true;
-                document.getElementById('udpOptions').hidden = true;
-                document.getElementById('icmpOptions').hidden = false;
-            }
+            document.getElementById('protocolSpecificOptions').style.display = 'flex';
+            document.getElementById('protocolSpecificOptionsTitle').style.display = 'block';
+            document.getElementById('protocolSpecificOptions').style.border = '2px solid #acacac';
+            document.getElementById('protocolSpecificOptions').style.marginBottom = '10px';
+            document.getElementById('ipOptions').style.display = (protocol === 'ip') ? 'flex' : 'none';
+            document.getElementById('tcpOptions').style.display = (protocol === 'tcp') ? 'flex' : 'none';
+            document.getElementById('udpOptions').style.display = (protocol === 'udp') ? 'flex' : 'none';
+            document.getElementById('icmpOptions').style.display = (protocol === 'icmp') ? 'flex' : 'none';
         } else {
-            document.getElementById('protocolSpecificOptions').hidden = true;
-            document.getElementById('ipOptions').hidden = true;
-            document.getElementById('tcpOptions').hidden = true;
-            document.getElementById('udpOptions').hidden = true;
-            document.getElementById('icmpOptions').hidden = true;
+            document.getElementById('protocolSpecificOptions').style.display = 'none';
+            document.getElementById('protocolSpecificOptionsTitle').style.display = 'none';
+            document.getElementById('ipOptions').style.display = 'none';
+            document.getElementById('tcpOptions').style.display = 'none';
+            document.getElementById('udpOptions').style.display = 'none';
+            document.getElementById('icmpOptions').style.display = 'none';
             document.getElementById('protocolSpecificOptions').style.border = 'none';
             document.getElementById('protocolSpecificOptions').style.marginBottom = '0px';
         }
@@ -361,5 +346,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generateRule();
     }
+
+    
+    document.getElementById('protocolSpecificOptions').style.display = 'none';
+    document.getElementById('protocolSpecificOptionsTitle').style.display = 'none';
+    document.getElementById('ipOptions').style.display = 'none';
+    document.getElementById('tcpOptions').style.display = 'none';
+    document.getElementById('udpOptions').style.display = 'none';
+    document.getElementById('icmpOptions').style.display = 'none';
+    document.getElementById('protocolSpecificOptions').style.border = '2px solid #acacac';
+    document.getElementById('protocolSpecificOptions').style.marginBottom = '0px';
 
 });
