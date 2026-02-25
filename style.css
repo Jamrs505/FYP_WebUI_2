@@ -31,7 +31,6 @@ body {
   border-radius: 4px;
 }
 
-/* Box containers: add padding, spacing and titles */
 #ruleHeaders, #protocolSpecificOptions, #genericOptions, #contentSection, #regexSection, #postDetectionSection, #outputBox {
   display: flex;
   justify-content: center;
@@ -56,7 +55,7 @@ body {
   gap: 5px;
 }
 
-/* Title at top of each box */
+
 .boxTitle {
   width: 100%;
   margin: 0 0 8px 0;
@@ -64,38 +63,38 @@ body {
   text-align: left;
 }
 
-/* Checkbox item grouping and styling */
 .checkboxItem {
   display: inline-flex;
   align-items: center;
   padding-right: 16px;
 }
 
-/* Make checkboxes easier to click and clearer visually */
 input[type="checkbox"] {
   width: 18px;
   height: 18px;
   accent-color: #0b76ef;
 }
 
-/* Improve spacing inside basic boxes (reduced) */
+
 .basicBox, .basicBoxShort, .basicBoxLong {
   padding: 4px 6px;
   margin: 3px;
 }
 
-/* Grouped controls: keep related controls close together, groups separated */
 #dsizeDiv, #ttlDiv, #ip_protoDiv, #http_methodDiv, #http_stat_codeDiv, #flagsDiv, #flowDiv, #flowDivUDP, #itypeDiv, #icodeDiv, #referenceDiv, #serviceDiv, #contentDiv, #pcreDiv, #detection_filter {
   display: flex;
   align-items: center;
-  gap: 6px; /* close spacing inside group */
-  margin-right: 18px; /* larger gap between groups */
+  gap: 6px;
+  margin-right: 18px;
 }
 
-/* Make sure grouped inputs are centered together */
 #ruleHeaders > *, #protocolSpecificOptions > *, #genericOptions > *, #contentSection > *, #regexSection > *, #postDetectionSection > * {
   display: inline-flex;
   align-items: center;
+}
+
+#flowState, #flowDirection, #flowDirectionUDP {
+  width: 150px;
 }
 
 /* Specific Styles */
@@ -117,10 +116,6 @@ input[type="checkbox"] {
 
 #http_stat_code {
   width: 280px;
-}
-
-#flowState, #flowDirection, #flowDirectionUDP {
-  width: 150px;
 }
 
 #copiedMsg {

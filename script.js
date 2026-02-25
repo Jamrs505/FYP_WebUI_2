@@ -310,7 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach(input => {input.addEventListener('input', generateRule);});
 
     function clearProtocolInputs() {
-        console.log('Protocol changed, clearing protocol specific inputs'); //Testing
         //Clear IP options
         document.getElementById('ttlOperator').value = 'TTL';
         document.getElementById('ttl').value = '';
