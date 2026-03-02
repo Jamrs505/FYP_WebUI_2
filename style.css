@@ -37,7 +37,7 @@ body {
   align-items: flex-start;
   flex-wrap: wrap;
   width: 90%;
-  margin-left: 5%;
+  justify-self: center;
   border: 2px solid #acacac;
   margin-bottom: 10px;
   border-radius: 6px;
