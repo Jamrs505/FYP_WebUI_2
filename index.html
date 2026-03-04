@@ -262,7 +262,7 @@
                 <input class="basicBox" type="number" min="0" max="255" id="itype" placeholder="itype"></input>
     
                 <input class="basicBox" type="number" min="0" max="254" id="icodeStart" placeholder="icode start"></input>
-                <select class="basicBox" id="icodeOperator">
+                <select class="basicBox" id="icodeOperator" width="1000px">
                     <option selected=true>ICMP Code</option>
                     <option value="&gt;">&gt;</option>
                     <option value="&lt;">&lt;</option>
@@ -379,7 +379,7 @@
     </div>
 
     <div id="outputBox">
-        <input type="text" name="outputText" id="outputText" readonly></input>
+        <textarea id="outputText" readonly></textarea>
         <span hidden id="copiedMsg">Copied to Clipboard</span>
     </div>
 

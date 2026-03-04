@@ -108,6 +108,7 @@ input[type="checkbox"] {
   padding: 0px;
   border: none;
   background-color: transparent;
+  text-wrap: wrap;
 }
 
 #http_method {
@@ -132,6 +133,10 @@ input[type="checkbox"] {
   pointer-events: none;
   white-space: nowrap;
   box-shadow: 0 5x 20px rgba(0, 0, 0, 0.25);
+}
+
+#icodeOperator {
+  width: 110px;
 }
 
 .desktop-break {
