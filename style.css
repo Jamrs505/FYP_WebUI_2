@@ -88,9 +88,48 @@ input[type="checkbox"] {
   margin-right: 18px;
 }
 
-#ruleHeaders > *, #protocolSpecificOptions > *, #genericOptions > *, #contentSection > *, #regexSection > *, #postDetectionSection > * {
-  display: inline-flex;
-  align-items: center;
+#contentSection > button {
+  flex-basis: 20%;
+  padding: 5px 10px;
+  margin: 0px 0px 0px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #888888;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+#contentSection > button:hover:not(:disabled) {
+  background-color: #e8e8e8;
+}
+
+#contentSection > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#regexSection > button {
+  flex-basis: 20%;
+  padding: 5px 10px;
+  margin: 0px 0px 0px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #888888;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+#regexSection > button:hover:not(:disabled) {
+  background-color: #e8e8e8;
+}
+
+#regexSection > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 #flowState, #flowDirection, #flowDirectionUDP {
@@ -142,6 +181,12 @@ input[type="checkbox"] {
 .desktop-break {
   display: none;
 }
+
+.desktop-break2 {
+    display: block;
+    flex-basis: 100%;
+    height: 0;
+  }
 
 @media screen and (min-width: 1660px) {
   .desktop-break {

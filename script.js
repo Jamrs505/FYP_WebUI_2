@@ -2,6 +2,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('input, select');
     const outputField = document.getElementById('outputText');
 
+    const buttonAddContent = document.getElementById('buttonAddContent');
+    const buttonRemoveContent = document.getElementById('buttonRemoveContent');
+    const buttonAddRegex = document.getElementById('buttonAddRegex');
+    const buttonRemoveRegex = document.getElementById('buttonRemoveRegex');
+    
+    buttonAddContent.addEventListener('click', addContent);
+    buttonRemoveContent.addEventListener('click', removeContent);
+    buttonAddRegex.addEventListener('click', addRegex);
+    buttonRemoveRegex.addEventListener('click', removeRegex);
+    
+    buttonAddContent.disabled = true;
+    buttonRemoveContent.disabled = true;
+    buttonAddRegex.disabled = true;
+    buttonRemoveRegex.disabled = true;
+
+    //Storage keys for items
+    const CONTENT_STORAGE_KEY = 'snortRuleContent';
+    const REGEX_STORAGE_KEY = 'snortRuleRegex';
+    const storedContent = getStoredContent();
+    while (storedContent.length > 0) {storedContent.pop(); saveStoredContent(storedContent);}
+    const storedRegex = getStoredRegex();
+    while (storedRegex.length > 0) {storedRegex.pop(); saveStoredRegex(storedRegex);}
+
+    function getStoredContent() {
+        const stored = sessionStorage.getItem(CONTENT_STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveStoredContent(items) {
+        sessionStorage.setItem(CONTENT_STORAGE_KEY, JSON.stringify(items));
+    }
+
+    function getStoredRegex() {
+        const stored = sessionStorage.getItem(REGEX_STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveStoredRegex(items) {
+        sessionStorage.setItem(REGEX_STORAGE_KEY, JSON.stringify(items));
+    }
+
     function generateRule() {
         //ruleHeaders
         const action = document.getElementById('action').value;
@@ -205,32 +246,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-        //Content options
+        //Content options - enable button if content is present
         if (content) {
-            if (http_uri) rule += 'http_uri; ';
-            rule += `content:"${content}"`;
-            if (fast_pattern) rule += ', fast_pattern';
-            if (nocase) rule += ', nocase';
-            if (offset) rule += `, offset:${offset}`;
-            if (depth) rule += `, depth:${depth}`;
-
-            rule += '; ';
+            buttonAddContent.disabled = false;
+        } else {
+            buttonAddContent.disabled = true;
         }
 
-        //Regex options
+        // Add stored content items to the rule
+        const storedContent = getStoredContent();
+        storedContent.forEach(item => {
+            if (item.http_uri) rule += 'http_uri; ';
+            rule += `content:"${item.content}"`;
+            if (item.fast_pattern) rule += ', fast_pattern';
+            if (item.nocase) rule += ', nocase';
+            if (item.offset) rule += `, offset:${item.offset}`;
+            if (item.depth) rule += `, depth:${item.depth}`;
+            rule += '; ';
+        });
+
+        //Regex options - enable button if pcre is present
         if (pcre) {
-            rule += `pcre:"/${pcre}/"`;
-            if (pcreFlagi) rule += 'i';
-            if (pcreFlags) rule += 's';
-            if (pcreFlagm) rule += 'm';
-            if (pcreFlagx) rule += 'x';
-            if (pcreFlagA) rule += 'A';
-            if (pcreFlagE) rule += 'E';
-            if (pcreFlagG) rule += 'G';
-            if (pcreFlagO) rule += 'O';
-            if (pcreFlagR) rule += 'R';
-            rule += '; ';
+            buttonAddRegex.disabled = false;
+        } else {
+            buttonAddRegex.disabled = true;
         }
+
+        // Add stored regex items to the rule
+        const storedRegex = getStoredRegex();
+        storedRegex.forEach(item => {
+            rule += `pcre:"/${item.pcre}/"`;
+            if (item.pcreFlagi) rule += 'i';
+            if (item.pcreFlags) rule += 's';
+            if (item.pcreFlagm) rule += 'm';
+            if (item.pcreFlagx) rule += 'x';
+            if (item.pcreFlagA) rule += 'A';
+            if (item.pcreFlagE) rule += 'E';
+            if (item.pcreFlagG) rule += 'G';
+            if (item.pcreFlagO) rule += 'O';
+            if (item.pcreFlagR) rule += 'R';
+            rule += '; ';
+        });
         if (detection_filterTrack !== 'Track by' && detection_filterCount && detection_filterSeconds) {
             rule += `detection_filter: track ${detection_filterTrack}, count ${detection_filterCount}, seconds ${detection_filterSeconds}; `;
         }
@@ -346,7 +402,125 @@ document.addEventListener('DOMContentLoaded', () => {
         generateRule();
     }
 
-    
+    function addContent() {
+        // Get current content values
+        const content = document.getElementById('content').value;
+        const fast_pattern = document.getElementById('fast_pattern').checked;
+        const nocase = document.getElementById('nocase').checked;
+        const offset = document.getElementById('offset').value;
+        const depth = document.getElementById('depth').value;
+        const http_uri = document.getElementById('http_uri').checked;
+
+        // Only proceed if content field has a value
+        if (!content) return;
+
+        // Create content item object
+        const contentItem = {
+            content: content,
+            fast_pattern: fast_pattern,
+            nocase: nocase,
+            offset: offset,
+            depth: depth,
+            http_uri: http_uri
+        };
+
+        // Add to storage
+        const storedContent = getStoredContent();
+        storedContent.push(contentItem);
+        saveStoredContent(storedContent);
+
+        // Clear content inputs
+        document.getElementById('content').value = '';
+        document.getElementById('fast_pattern').checked = false;
+        document.getElementById('nocase').checked = false;
+        document.getElementById('offset').value = '';
+        document.getElementById('depth').value = '';
+        document.getElementById('http_uri').checked = false;
+
+        //Enable remove button and disable add button
+        buttonRemoveContent.disabled = false;
+        buttonAddContent.disabled = true;
+
+        //Regenerate rule
+        generateRule();
+    }
+
+    function removeContent() {
+        const storedContent = getStoredContent();
+        if (storedContent.length > 0) {
+            storedContent.pop();
+            saveStoredContent(storedContent);
+        }
+
+        if (storedContent.length === 0) {
+            buttonRemoveContent.disabled = true;
+        }
+
+        generateRule();
+    }
+
+    function addRegex() {
+        //Get current regex values
+        const pcre = document.getElementById('pcre').value;
+        const pcreFlagi = document.getElementById('pcreFlagi').checked;
+        const pcreFlags = document.getElementById('pcreFlags').checked;
+        const pcreFlagm = document.getElementById('pcreFlagm').checked;
+        const pcreFlagx = document.getElementById('pcreFlagx').checked;
+        const pcreFlagA = document.getElementById('pcreFlagA').checked;
+        const pcreFlagE = document.getElementById('pcreFlagE').checked;
+        const pcreFlagG = document.getElementById('pcreFlagG').checked;
+        const pcreFlagO = document.getElementById('pcreFlagO').checked;
+        const pcreFlagR = document.getElementById('pcreFlagR').checked;
+
+        if (!pcre) return;
+        const regexItem = {
+            pcre: pcre,
+            pcreFlagi: pcreFlagi,
+            pcreFlags: pcreFlags,
+            pcreFlagm: pcreFlagm,
+            pcreFlagx: pcreFlagx,
+            pcreFlagA: pcreFlagA,
+            pcreFlagE: pcreFlagE,
+            pcreFlagG: pcreFlagG,
+            pcreFlagO: pcreFlagO,
+            pcreFlagR: pcreFlagR
+        };
+
+        const storedRegex = getStoredRegex();
+        storedRegex.push(regexItem);
+        saveStoredRegex(storedRegex);
+
+        document.getElementById('pcre').value = '';
+        document.getElementById('pcreFlagi').checked = false;
+        document.getElementById('pcreFlags').checked = false;
+        document.getElementById('pcreFlagm').checked = false;
+        document.getElementById('pcreFlagx').checked = false;
+        document.getElementById('pcreFlagA').checked = false;
+        document.getElementById('pcreFlagE').checked = false;
+        document.getElementById('pcreFlagG').checked = false;
+        document.getElementById('pcreFlagO').checked = false;
+        document.getElementById('pcreFlagR').checked = false;
+
+        buttonRemoveRegex.disabled = false;
+        buttonAddRegex.disabled = true;
+
+        generateRule();
+    }
+
+    function removeRegex() {
+        const storedRegex = getStoredRegex();
+        if (storedRegex.length > 0) {
+            storedRegex.pop();
+            saveStoredRegex(storedRegex);
+        }
+
+        if (storedRegex.length === 0) {
+            buttonRemoveRegex.disabled = true;
+        }
+
+        generateRule();
+    }
+
     document.getElementById('protocolSpecificOptions').style.display = 'none';
     document.getElementById('protocolSpecificOptionsTitle').style.display = 'none';
     document.getElementById('ipOptions').style.display = 'none';
@@ -355,5 +529,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('icmpOptions').style.display = 'none';
     document.getElementById('protocolSpecificOptions').style.border = '2px solid #acacac';
     document.getElementById('protocolSpecificOptions').style.marginBottom = '0px';
-
 });
